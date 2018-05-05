@@ -46,3 +46,5 @@ KSPandMH/
 *.userprefs
 Source/obj/
 Source/.vs
+GameData/CrewLight/Unity*
+GameData/CrewLight/*.dll
