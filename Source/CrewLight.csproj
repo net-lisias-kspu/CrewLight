@@ -38,6 +38,8 @@
     <Compile Include="SunLight.cs" />
     <Compile Include="SwitchLight.cs" />
     <Compile Include="ModuleMotionDetector.cs" />
+    <Compile Include="Version.cs" />
+    <Compile Include="Dependencies.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
