@@ -178,6 +178,24 @@ namespace CrewLight
 
 		#endregion
 
+		private void OnVesselCreated(object vessel)
+		{
+			Vessel v = (Vessel)vessel;
+			Registry.Vessels.CheckAndAdd (v);
+		}
+
+		private void OnVesselDestroyed (object vessel)
+		{
+			Vessel v = (Vessel)vessel;
+			Registry.Vessels.RemoveIfExists (v);
+		}
+
+		private void RegisterEventHandlers()
+		{
+			GameEvents.onVesselCreate.Add (this.OnVesselCreated);	
+			GameEvents.onVesselDestroy.Add (this.OnVesselDestroyed);	
+		}
+
 		private void D (String str)
 		{
 			Debug.Log ("[Crew Light - LightDirector] : " + str);
