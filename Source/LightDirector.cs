@@ -11,6 +11,8 @@ namespace CrewLight
 	{
 		public void Start ()
 		{
+			this.RegisterEventHandlers ();
+
 			// CrewLight :
 			if (CLSettings.useTransferCrew) {
 				GameEvents.onCrewTransferred.Add (CrewLightTransfer);
