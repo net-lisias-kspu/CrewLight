@@ -21,13 +21,15 @@ namespace CrewLight
 		// Distant Lightning :
 		public static bool useMorseCode = true;
 		public static bool onlyForControllable = false;
-		public static string morseCodeStr = "_._|...|.__.";
+		public static string morseCodeStr = "_._ ... .__.";
 		public static double distance = 200d;
 		public static float ditDuration = 1.1f;
 		public static float dahDuration = 2.5f;
 		public static float symbolSpaceDuration = 1.1f;
 		public static float letterSpaceDuration = 1.7f;
 		public static float wordSpaceDuration = 2.5f;
+		public static char letterSpaceChar = ' ';
+		public static char wordSpaceChar = '|';
 
 		// Sun Light :
 		public static bool useSunLight = true;
@@ -77,7 +79,7 @@ namespace CrewLight
 		public static bool useMotionDetector = true;
 
 		// Internal :
-		public static List<int> morseCode;
+		public static List<MorseCode> morseCode;
 		public static int layerMask = (1 << 10 | 1 << 15); // Scaled & Local Scenery layer
 		public static int maxSearch = 200;
 
@@ -174,17 +176,30 @@ namespace CrewLight
 			nodeDistantVesselLight.SetValue ("symbol_space", symbolSpaceDuration, 
 				"duration of the darkness between two symbol, in seconds", true);
 
+			if (nodeDistantVesselLight.HasValue ("letter_space_char")) {
+				letterSpaceChar = nodeDistantVesselLight.GetValue ("letter_space_char")[0];
+			}
+			nodeDistantVesselLight.SetValue ("letter_space_char", letterSpaceDuration,
+				"character of the darkness between two letters in seconds", true);
+
 			if (nodeDistantVesselLight.HasValue ("letter_space")) {
 				letterSpaceDuration = float.Parse (nodeDistantVesselLight.GetValue ("letter_space"));
 			}
-			nodeDistantVesselLight.SetValue ("letter_space", letterSpaceDuration, 
-				"duration of the darkness between two letters, '|', in seconds", true);
+			nodeDistantVesselLight.SetValue ("letter_space", letterSpaceDuration,
+                String.Format("duration of the darkness between two letters, currently '{0}', in seconds",letterSpaceDuration), true);
+
+			if (nodeDistantVesselLight.HasValue ("word_space_char")) {
+				wordSpaceChar = nodeDistantVesselLight.GetValue ("word_space_char") [0];
+			}
+			nodeDistantVesselLight.SetValue ("word_space_char", letterSpaceDuration,
+				"character of the darkness between two letters in seconds", true);
 
 			if (nodeDistantVesselLight.HasValue ("word_space")) {
 				wordSpaceDuration = float.Parse (nodeDistantVesselLight.GetValue ("word_space"));
 			}
 			nodeDistantVesselLight.SetValue ("word_space", wordSpaceDuration, 
-				"duration of the darkness between two words, ' ', in seconds", true);
+                String.Format ("duration of the darkness between two words, currently '{0}', in seconds",wordSpaceDuration), true);
+			
 			//
 			// Sun Light
 			//
@@ -384,23 +399,24 @@ namespace CrewLight
 
 		private static void ParseMorse ()
 		{
-			morseCode = new List<int> ();
+			morseCode = new List<MorseCode> ();
 			foreach (char c in morseCodeStr) {
 				switch (c) {
 				case '.':
-					morseCode.Add (0);
+					morseCode.Add (MorseCode.dih);
 					break;
 				case '_':
-					morseCode.Add (1);
+					morseCode.Add (MorseCode.daah);
 					break;
-				case '|':
-					morseCode.Add (2);
+				case '-':
+					morseCode.Add (MorseCode.daah);
 					break;
-				case ' ':
-					morseCode.Add (3);
+				default:
+					if (c == CLSettings.letterSpaceChar)        morseCode.Add (MorseCode.letterspc);
+					else if (c == CLSettings.wordSpaceChar)     morseCode.Add (MorseCode.wordspc);
 					break;
 				}
-				morseCode.Add (4);
+				morseCode.Add (MorseCode.symspc);
 			}
 		}
 	}

@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace CrewLight
 {
+	public enum MorseCode { dih, daah, letterspc, wordspc, symspc };
+
 	public class MorseLight : MonoBehaviour
 	{
 		private Vessel vessel;
@@ -67,25 +69,25 @@ namespace CrewLight
 			yield return new WaitForSeconds (CLSettings.ditDuration);
 
 			// Morse message
-			foreach (int c in CLSettings.morseCode) {
+			foreach (MorseCode c in CLSettings.morseCode) {
 				switch (c) {
-				case 0:
+				case MorseCode.dih:
 					SwitchLight.On (modulesLight);
 					yield return new WaitForSeconds (CLSettings.ditDuration);
 					break;
-				case 1:
+				case MorseCode.daah:
 					SwitchLight.On (modulesLight);
 					yield return new WaitForSeconds (CLSettings.dahDuration);
 					break;
-				case 2:
+				case MorseCode.letterspc:
 					SwitchLight.Off (modulesLight);
 					yield return new WaitForSeconds (CLSettings.letterSpaceDuration);
 					break;
-				case 3:
+				case MorseCode.wordspc:
 					SwitchLight.Off (modulesLight);
 					yield return new WaitForSeconds (CLSettings.wordSpaceDuration);
 					break;
-				case 4:
+				case MorseCode.symspc:
 					SwitchLight.Off (modulesLight);
 					yield return new WaitForSeconds (CLSettings.symbolSpaceDuration);
 					break;
