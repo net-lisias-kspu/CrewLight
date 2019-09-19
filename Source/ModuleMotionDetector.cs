@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ClickThroughFix;
 
 namespace CrewLight
 {
@@ -229,7 +230,7 @@ namespace CrewLight
 
 			if (showGUI) {
 				GUILayout.BeginArea (windowRect);
-				windowRect = GUILayout.Window (837190, windowRect, MotionDetectorWindow, "Motion Detector");
+				windowRect = ClickThruBlocker.GUILayoutWindow(837190, windowRect, MotionDetectorWindow, "Motion Detector");
 				GUILayout.EndArea ();
 			}
 		}

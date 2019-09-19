@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using KSP.Localization;
+using ClickThroughFix;
 
 namespace CrewLight
 {
@@ -180,14 +181,14 @@ namespace CrewLight
 			if (showSettingsWindow)
 			{
 				GUILayout.BeginArea (morseSettingsRect);
-				morseSettingsRect = GUILayout.Window (991237, morseSettingsRect, MorseSettingsWindow, Localizer.Format ("#autoLOC_CL_0077"));
+				morseSettingsRect =ClickThruBlocker.GUILayoutWindow (991237, morseSettingsRect, MorseSettingsWindow, Localizer.Format ("#autoLOC_CL_0077"));
 				GUILayout.EndArea ();
 			}
 
 			if (showAlphabetWindow)
 			{
 				GUILayout.BeginArea (morseAlphabetRect);
-				morseAlphabetRect = GUILayout.Window (596064, morseAlphabetRect, MorseAlphabetWindow, Localizer.Format ("#autoLOC_CL_0078"));
+				morseAlphabetRect = ClickThruBlocker.GUILayoutWindow(596064, morseAlphabetRect, MorseAlphabetWindow, Localizer.Format ("#autoLOC_CL_0078"));
 				GUILayout.EndArea ();
 			}
 		}
