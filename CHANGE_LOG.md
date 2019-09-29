@@ -1,5 +1,10 @@
 # CrewLight /L :: Archive
 
+* 2017-0922: 1.9 (Li0n) for KSP 1.3.0
+	+ Fixes for Aviation Lights
+	+ The beacon lights flashing when the throttle is up is working again
+	+ AviationLights lights can now be toggle on EVA, no blinking option tho, they'll use the blinking preset defined in the settings.cfg
+	+ Fail-safe for part using AviationLights module with a different name than in the original mod
 * 2017-0921: 1.8 (Li0n) for KSP 1.3.0
 	+ support for [Ven's Stock Part Revamp](https://forum.kerbalspaceprogram.com/index.php?/topic/83696-122-stock-part-revamp-update-196-released-source-files/)
 * 2017-0919: 1.7 (Li0n) for KSP 1.3.0
