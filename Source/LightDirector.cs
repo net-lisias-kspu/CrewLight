@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace CrewLight
@@ -203,10 +202,6 @@ namespace CrewLight
 			GameEvents.onVesselDestroy.Add (this.OnVesselDestroyed);	
 		}
 
-		private void D (String str)
-		{
-			Debug.Log ("[Crew Light - LightDirector] : " + str);
-		}
 	}
 }
 

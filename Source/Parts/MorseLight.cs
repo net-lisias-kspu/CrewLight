@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -214,10 +213,6 @@ namespace CrewLight
 			}
 		}
 
-		private void D (string str)
-		{
-			Debug.Log ("[Crew Light - MorseLight] : " + str);
-		}
 	}
 }
 

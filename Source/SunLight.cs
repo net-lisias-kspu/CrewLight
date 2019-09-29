@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -254,10 +253,6 @@ namespace CrewLight
 			}
 		}
 
-		private void D (String str)
-		{
-			Debug.Log ("[Crew Light - SunLight] : " + str);
-		}
 	}
 }
 

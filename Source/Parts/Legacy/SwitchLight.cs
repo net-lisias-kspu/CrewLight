@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Reflection;
-using UnityEngine;
-using KSP.Localization;
 
 namespace CrewLight
 {
@@ -284,10 +281,6 @@ namespace CrewLight
 			return navLightInt;
 		}
 
-		private static void D (String str)
-		{
-			Debug.Log ("[Crew Light - SwitchLight] : " + str);
-		}
 	}
 }
 

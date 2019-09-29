@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 namespace CrewLight
 {
@@ -70,10 +68,6 @@ namespace CrewLight
 			}
 		}
 
-		private void D (String str)
-		{
-			Debug.Log ("[Crew Light - ModuleLightEVAToggle] : " + str);
-		}
 	}
 }
 
