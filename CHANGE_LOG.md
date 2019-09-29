@@ -1,5 +1,9 @@
 # CrewLight /L :: Archive
 
+* 2016-1223: 0.9 (Li0n) for KSP 1.2.2
+	+ Lights on Kerbal's helmet are now toggled as the sun rise/fall, can be tweaked in settings.cfg so lights are always on when in space or landed
+	+ Better handling of the sunlight feature, mostly for building / modifying vessel with KIS
+	+ Correct a typo in the .version file, KSP-AVC should now give the right link when a new version comes up
 * 2016-1213: 0.8 (Li0n) for KSP 1.2.2
 	+ Lights who respond to the sun rise/fall will now be toggled when reaching a certain depth
 	+ Detection of terrain and KSC building shadow when checking if the sun shines on the craft
