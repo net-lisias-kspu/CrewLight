@@ -1,5 +1,10 @@
 # CrewLight /L :: Archive
 
+* 2017-0217: 1.4 (Li0n) for KSP 1.2.2
+	+ Enhanced support for Aviation Light by BigNose / MoarDV, each light can have their lightning style define in the config, beacon light will go on only when you push the throttle (configurable)
+	+ fix for light going off while a part is still crewed
+	+ better method for lightning part, no more "SendMessage()", using cast and reflection instead
+	+ fix a typo in the settings file
 * 2017-0213: 1.3 (Li0n) for KSP 1.2.2
 	+ Fix for "Electric Lights" by Alshain
 * 2017-0204: 1.2 (Li0n) for KSP 1.2.2
