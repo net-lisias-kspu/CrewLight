@@ -1,5 +1,14 @@
 # CrewLight /L :: Archive
 
+* 2017-0114: 1.1 (Li0n) for KSP 1.2.2
+	+ Adjust the delay between two check of the sun position according to the warp-time speed
+		- Settings.cfg : delay_in_low_timewarp (value get divided by the current time-warp speed) and delay_in_high_timewarp
+	+ Change the default settings for the morse code, light will stay on longer
+	+ Toggling a vessel light on EVA will no longer toggle its symmetry counter parts
+		- Can be changed in the settings
+		- Also add a setting to disable light interaction on EVA
+	+ Add a setting to disable lightning of a part when a crew is inside, if used crewed part 's light will be toggled as the sun rises / fall
+	+ Enhance settings behavior, adding new settings no longer force the whole settings.cfg file to be reset
 * 2017-0112: 1.0 (Li0n) for KSP 1.2.2
 	+ For KIS : white-list ModuleLightEVAToggle so lights can be stock-pile again
 	+ Update readme on [Github](https://github.com/Li0n-0/CrewLight/releases) and [SpaceDock](http://spacedock.info/mod/1012/Crew%20Light)
