@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight", "CrewLight.csproj", "{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight", "Source\CrewLight.csproj", "{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
