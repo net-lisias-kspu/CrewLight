@@ -1,5 +1,11 @@
 # CrewLight /L :: Archive
 
+* 2016-1213: 0.8 (Li0n) for KSP 1.2.2
+	+ Lights who respond to the sun rise/fall will now be toggled when reaching a certain depth
+	+ Detection of terrain and KSC building shadow when checking if the sun shines on the craft
+	+ Nearby vessels get theirs lights toggled as the sun rise/fall
+	+ Added a .version file for [KSP-AVC](http://forum.kerbalspaceprogram.com/index.php?/topic/72169-12-ksp-avc-add-on-version-checker-plugin-1162-miniavc-ksp-avc-online-2016-10-13/)
+	+ Remove source from the download, only on [GitHub](https://github.com/Li0n-0/CrewLight) now
 * 2016-1209: 0.7 (Li0n) for KSP 1.2.2
 	+ New function : Lights are toggled depending if the sun shine on the vessel or not, only for part without crew capacity and not in the Light action group (tweakable in settings.cfg), thanks Real-Gecko for the idea and advice
 	+ New function : All lights can be removed from the light action group when building a vessel (so they all get toggled by the sun light), off by default
