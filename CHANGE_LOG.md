@@ -1,5 +1,11 @@
 # CrewLight /L :: Archive
 
+* 2016-1228: 0.10 (Li0n) for KSP 1.2.2
+	+ New Function : Kerbal on EVA can toggle light (only for non-crewable part)
+	+ Now support SurfaceLight by Why485, maintained by IgorZ
+	+ Landing gear/wheel 's light no longer respond to the sun rise / fall
+	+ ModuleManager by Sarbian is now required for toggling light on EVA
+	+ ModuleManager is bundled
 * 2016-1223: 0.9 (Li0n) for KSP 1.2.2
 	+ Lights on Kerbal's helmet are now toggled as the sun rise/fall, can be tweaked in settings.cfg so lights are always on when in space or landed
 	+ Better handling of the sunlight feature, mostly for building / modifying vessel with KIS
