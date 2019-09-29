@@ -1,5 +1,8 @@
 # CrewLight /L :: Archive
 
+* 2017-0529: 1.6 (Li0n) for KSP 1.3.0
+	+ recompile for KSP 1.3.0
+	+ update ModuleManager to 2.8.0
 * 2017-0320: 1.5 (Li0n) for KSP 1.2.2
 	+ fix for the "night lights" list not being fully populated if a landing gear was added to the ship
 * 2017-0217: 1.4 (Li0n) for KSP 1.2.2
