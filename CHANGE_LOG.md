@@ -1,5 +1,11 @@
 # CrewLight /L :: Archive
 
+* 2016-1129: 0.6 (Li0n) for KSP 1.2.1
+	+ If you are updating this mod please DELETE THE OLD VERSION
+			- Morse Code : nearby vessel will send you a morse message by toggling theirs lights as you approach
+			- Settings File : GameData/CrewLight/PluginData/Settings.cfg option to disabled the morse message and customize it and disabling the auto removal of crewable part from the Light action group
+			- Remove ModuleManager and all the patch
+	+ If you are updating this mod please DELETE THE OLD VERSION
 * 2016-1103: 0.5 (Li0n) for KSP 1.2.1
 	+ KSP 1.2.1 recompile
 	+ Add support for all the Wild Blue Industries mods (M.O.L.E. Buffalo, etc...)
