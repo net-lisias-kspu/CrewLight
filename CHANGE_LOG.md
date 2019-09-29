@@ -1,5 +1,7 @@
 # CrewLight /L :: Archive
 
+* 2017-0213: 1.3 (Li0n) for KSP 1.2.2
+	+ Fix for "Electric Lights" by Alshain
 * 2017-0204: 1.2 (Li0n) for KSP 1.2.2
 	+ Light triggered by the sun are now lighted in a staggered way, can be disabled/tweaked in settings.cfg
 	+ Some quality of life improvement of the code
