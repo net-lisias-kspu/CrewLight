@@ -1,5 +1,8 @@
 # CrewLight /L :: Archive
 
+* 2017-0112: 1.0 (Li0n) for KSP 1.2.2
+	+ For KIS : white-list ModuleLightEVAToggle so lights can be stock-pile again
+	+ Update readme on [Github](https://github.com/Li0n-0/CrewLight/releases) and [SpaceDock](http://spacedock.info/mod/1012/Crew%20Light)
 * 2016-1228: 0.10 (Li0n) for KSP 1.2.2
 	+ New Function : Kerbal on EVA can toggle light (only for non-crewable part)
 	+ Now support SurfaceLight by Why485, maintained by IgorZ
