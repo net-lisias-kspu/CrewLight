@@ -1,5 +1,12 @@
 # CrewLight /L :: Archive
 
+* 2016-1209: 0.7 (Li0n) for KSP 1.2.2
+	+ New function : Lights are toggled depending if the sun shine on the vessel or not, only for part without crew capacity and not in the Light action group (tweakable in settings.cfg), thanks Real-Gecko for the idea and advice
+	+ New function : All lights can be removed from the light action group when building a vessel (so they all get toggled by the sun light), off by default
+	+ Rebuild for KSP 1.2.2
+	+ Part with multiple light are now correctly lighted, support for MK1 Cabin Hatch by skalou
+	+ Use REGEX to determine if an animation is light related, support for MK1 Cabin Hatch by skalou
+	+ Cleaned up and readability enhancement
 * 2016-1129: 0.6 (Li0n) for KSP 1.2.1
 	+ If you are updating this mod please DELETE THE OLD VERSION
 			- Morse Code : nearby vessel will send you a morse message by toggling theirs lights as you approach
