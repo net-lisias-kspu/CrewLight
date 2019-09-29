@@ -1,5 +1,8 @@
 # CrewLight /L :: Archive
 
+* 2018-1030: 1.16 (Li0n) for KSP 1.4.3
+	+ all settings can now be tweaked in-game
+	+ all settings ready to be localized (only english for now)
 * 2018-0503: 1.15 (Li0n) for KSP 1.4.3
 	+ recompile for KSP 1.4.3
 * 2018-0403: 1.14 (Li0n) for KSP 1.4.2
