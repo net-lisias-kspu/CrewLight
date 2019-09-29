@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using KSP.Localization;
+using GUILayout = KSPe.UI.GUILayout;
 
 namespace CrewLight
 {

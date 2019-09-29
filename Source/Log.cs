@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Diagnostics;
 using KSPe.Util.Log;
-using System.Diagnostics;
 
 namespace CrewLight
 {

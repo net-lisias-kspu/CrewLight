@@ -71,6 +71,9 @@
     <Reference Include="KSPe">
       <HintPath>..\..\..\..\..\LIB\plugins\KSPe.dll</HintPath>
     </Reference>
+    <Reference Include="KSPe.UI">
+      <HintPath>..\..\..\..\..\LIB\plugins\KSPe.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Parts\Legacy\" />
