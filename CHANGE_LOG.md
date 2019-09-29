@@ -1,5 +1,9 @@
 # CrewLight /L :: Archive
 
+* 2018-0106: 1.11 (Li0n) for KSP 1.3.1
+	+ New function : Lights can have a motion detector set to them, turning the light on when a Kerbal is near by, [see this forum post for pix and more info](https://forum.kerbalspaceprogram.com/index.php?/topic/154901-131-crew-light-an-automatic-light-manager-v111-6-jan-2018/&do=findComment&comment=3261343)
+	+ fix : add ModuleBeaconLightEngine to the KIS white-list
+	+ bundle ModuleManager 3.0.1
 * 2017-1019: 1.10 (Li0n) for KSP 1.3.1
 	+ recompile for KSP 1.3.1
 	+ fix a bug with beacon light from Aviation Lights becoming inoperable in the VAB
