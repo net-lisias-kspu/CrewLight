@@ -1,5 +1,9 @@
 # CrewLight /L :: Archive
 
+* 2018-0310: 1.12 (Li0n) for KSP 1.4
+	+ recompile for KSP 1.4
+	+ workaround for the MK1-3 pod, adding it internal and flight portraits
+	+ bundle ModuleManager 3.0.4
 * 2018-0106: 1.11 (Li0n) for KSP 1.3.1
 	+ New function : Lights can have a motion detector set to them, turning the light on when a Kerbal is near by, [see this forum post for pix and more info](https://forum.kerbalspaceprogram.com/index.php?/topic/154901-131-crew-light-an-automatic-light-manager-v111-6-jan-2018/&do=findComment&comment=3261343)
 	+ fix : add ModuleBeaconLightEngine to the KIS white-list
