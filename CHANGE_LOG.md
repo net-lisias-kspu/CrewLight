@@ -1,5 +1,9 @@
 # CrewLight /L :: Archive
 
+* 2017-0919: 1.7 (Li0n) for KSP 1.3.0
+	+ support for [KerbalElectric](https://forum.kerbalspaceprogram.com/index.php?/topic/165449-wip-kerbal-electric-moar-lights/)
+	+ fix for the "disableAllAg" setting didn't do anything
+	+ bundle ModuleManager 2.8.1
 * 2017-0529: 1.6 (Li0n) for KSP 1.3.0
 	+ recompile for KSP 1.3.0
 	+ update ModuleManager to 2.8.0
