@@ -1,6 +1,8 @@
 # CrewLight /L
 
-CrewLight /L is CrewLight maintained by LisiasT,
+**CrewLight** is an automatic light manager.
+
+**CrewLight /L** is CrewLight under Lisias' maintenance.
 
 
 ## Installation Instructions
@@ -17,6 +19,8 @@ The following file layout must be present after installation:
 ```
 <KSP_ROOT>
 	[GameData]
+		[000_KSPAPIExtensions]
+			...
 		[CrewLight]
 			[Localization]
 				en_us.cfg
@@ -30,6 +34,7 @@ The following file layout must be present after installation:
 			LICENSE
 			NOTICE
 			README.md
+		000_KSPe.dll
 		ModuleManager.dll
 		...
 	KSP.log
@@ -39,5 +44,7 @@ The following file layout must be present after installation:
 
 ### Dependencies
 
+* [KSPe](https://github.com/net-lisias-ksp/KSPAPIExtensions/releases/) (for KSP >= 1.2.2 - yeah, anything goes)
+	+ Not Included
 * [Module Manager](https://forum.kerbalspaceprogram.com/index.php?/topic/50533-*) 3.0.7 or later
 	+ Not Included
