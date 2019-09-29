@@ -1,5 +1,9 @@
 # CrewLight /L :: Archive
 
+* 2018-1218: 1.18 (Li0n) for KSP 1.5.1
+	+ Fix for the morse settings not being correctly applied, thanks @Gordon Dry
+	+ fix a typo in the KIS white-list, thanks @Critter79606
+	+ bundle ModuleManager 3.1.1
 * 2018-1030: 1.17 (Li0n) for KSP 1.5.1
 	+ fix duplicate part bug when motion detector is disabled
 	+ fix gui sphere of the motion detector catching click when it shouldn't
