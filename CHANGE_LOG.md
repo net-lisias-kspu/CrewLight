@@ -1,5 +1,10 @@
 # CrewLight /L :: Archive
 
+* 2018-0314: 1.13 (Li0n) for KSP 1.4.1
+	+ fix EVA light not turning on when the Kerbal is already on EVA when loading
+	+ recompile for KSP 1.4.1
+	+ remove workaround for the MK1-2 pod, no longer necessary
+	+ bundle ModuleManager 3.0.5
 * 2018-0310: 1.12 (Li0n) for KSP 1.4
 	+ recompile for KSP 1.4
 	+ workaround for the MK1-3 pod, adding it internal and flight portraits
