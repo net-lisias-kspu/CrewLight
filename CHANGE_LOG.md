@@ -1,5 +1,8 @@
 # CrewLight /L :: Archive
 
+* 2017-1019: 1.10 (Li0n) for KSP 1.3.1
+	+ recompile for KSP 1.3.1
+	+ fix a bug with beacon light from Aviation Lights becoming inoperable in the VAB
 * 2017-0922: 1.9 (Li0n) for KSP 1.3.0
 	+ Fixes for Aviation Lights
 	+ The beacon lights flashing when the throttle is up is working again
