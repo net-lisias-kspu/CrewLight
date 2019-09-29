@@ -1,5 +1,7 @@
 # CrewLight /L :: Archive
 
+* 2017-0921: 1.8 (Li0n) for KSP 1.3.0
+	+ support for [Ven's Stock Part Revamp](https://forum.kerbalspaceprogram.com/index.php?/topic/83696-122-stock-part-revamp-update-196-released-source-files/)
 * 2017-0919: 1.7 (Li0n) for KSP 1.3.0
 	+ support for [KerbalElectric](https://forum.kerbalspaceprogram.com/index.php?/topic/165449-wip-kerbal-electric-moar-lights/)
 	+ fix for the "disableAllAg" setting didn't do anything
