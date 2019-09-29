@@ -1,5 +1,13 @@
 # CrewLight /L :: Archive
 
+* 2018-1030: 1.17 (Li0n) for KSP 1.5.1
+	+ fix duplicate part bug when motion detector is disabled
+	+ fix gui sphere of the motion detector catching click when it shouldn't
+	+ settings clean up
+	+ recompile for KSP 1.5.1
+	+ bundle ModuleManager 3.1.0
+		- And
+		- all settings are now available in-game, in the difficulty menu
 * 2018-1030: 1.16 (Li0n) for KSP 1.4.3
 	+ all settings can now be tweaked in-game
 	+ all settings ready to be localized (only english for now)
