@@ -1,5 +1,8 @@
 # CrewLight /L :: Archive
 
+* 2019-0129: 1.19 (Li0n) for KSP 1.6.1
+	+ recompile for KSP 1.6.1
+	+ bundle ModuleManager 4.0.1
 * 2018-1218: 1.18 (Li0n) for KSP 1.5.1
 	+ Fix for the morse settings not being correctly applied, thanks @Gordon Dry
 	+ fix a typo in the KIS white-list, thanks @Critter79606
