@@ -1,5 +1,7 @@
 # CrewLight /L :: Archive
 
+* 2017-0320: 1.5 (Li0n) for KSP 1.2.2
+	+ fix for the "night lights" list not being fully populated if a landing gear was added to the ship
 * 2017-0217: 1.4 (Li0n) for KSP 1.2.2
 	+ Enhanced support for Aviation Light by BigNose / MoarDV, each light can have their lightning style define in the config, beacon light will go on only when you push the throttle (configurable)
 	+ fix for light going off while a part is still crewed
