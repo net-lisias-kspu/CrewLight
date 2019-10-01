@@ -406,10 +406,10 @@ namespace CrewLight
 					morseCode.Add (MorseCode.dih);
 					break;
 				case '_':
-					morseCode.Add (MorseCode.daah);
+					morseCode.Add (MorseCode.dah);
 					break;
 				case '-':
-					morseCode.Add (MorseCode.daah);
+					morseCode.Add (MorseCode.dah);
 					break;
 				default:
 					if (c == CLSettings.letterSpaceChar)        morseCode.Add (MorseCode.letterspc);
