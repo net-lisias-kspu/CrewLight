@@ -1,18 +1,16 @@
 {
-    "NAME":"Crew Light",
-    "URL":"https://raw.githubusercontent.com/linuxgurugamer/CrewLight/master/GameData/CrewLight/CrewLight.version",
-    "DOWNLOAD":"https://github.com/linuxgurugamer/CrewLight/releases",
-    "VERSION":
-    {
-        "MAJOR":1,
-        "MINOR":19,
-        "PATCH":1,
-        "BUILD":0
-    },
-    "KSP_VERSION_MIN":
-    {
-        "MAJOR":1,
-        "MINOR":7,
-        "PATCH":3
-    }
+  "NAME": "Crew Light",
+  "URL": "https://raw.githubusercontent.com/linuxgurugamer/CrewLight/master/GameData/CrewLight/CrewLight.version",
+  "DOWNLOAD": "https://github.com/linuxgurugamer/CrewLight/releases",
+  "VERSION": {
+    "MAJOR": 1,
+    "MINOR": 20,
+    "PATCH": 0,
+    "BUILD": 0
+  },
+  "KSP_VERSION_MIN": {
+    "MAJOR": 1,
+    "MINOR": 8,
+    "PATCH": 0
+  }
 }
