@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+
 using UnityEngine;
 using KSP.Localization;
+
 using GUILayout = KSPe.UI.GUILayout;
+using Asset = KSPe.IO.Asset<CrewLight.Startup>;
 
 namespace CrewLight
 {
@@ -48,7 +51,7 @@ namespace CrewLight
 				return;
 			}
 
-			morseAlph = (Texture)GameDatabase.Instance.GetTexture ("CrewLight/International_Morse_Code", false);
+			morseAlph = Asset.Texture2D.LoadFromFile("International_Morse_Code");
 
 			morseSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
 			ParseSettings ();

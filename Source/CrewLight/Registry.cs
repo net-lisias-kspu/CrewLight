@@ -1,18 +1,7 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace CrewLight
 {
-    [KSPAddon(KSPAddon.Startup.Instantly, true)]
-	internal class Startup : MonoBehaviour
-	{
-		private void Start()
-		{
-			Log.init();
-			Log.force("Version {0}", Version.Text);
-		}
-	}
-
 	namespace Registry {
 		public static class Vessels
 		{

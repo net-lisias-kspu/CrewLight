@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using KSP.Localization;
+﻿using KSP.Localization;
 
 namespace CrewLight
 {

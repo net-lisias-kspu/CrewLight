@@ -5,18 +5,7 @@ namespace CrewLight
 {
 	internal static class Log
 	{
-		private static readonly Logger log = Logger.CreateForType<LightDirector> ();
-
-		internal static void init ()
-		{
-			log.level =
-#if DEBUG
-				Level.TRACE
-#else
-				Level.INFO
-#endif
-				;
-		}
+		private static readonly Logger log = Logger.CreateForType<Startup> ();
 
 		internal static void force (string msg, params object [] @params)
 		{
