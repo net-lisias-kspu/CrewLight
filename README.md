@@ -1,26 +1,20 @@
-# CrewLight /L
+# CrewLight /L Unofficial
 
 **CrewLight** is an automatic light manager.
 
-**CrewLight /L** is CrewLight under Lisias' maintenance.
+Unofficial fork by Lisias.
 
 
 ## In a Hurry
 
-* [Source](https://github.com/net-lisias-ksp/CrewLight)
-	+ [Issue Tracker](https://github.com/net-lisias-ksp/CrewLight/issues)
+* [Latest Release](https://github.com/net-lisias-kspu/CrewLight/releases)
+    + [Binaries](https://github.com/net-lisias-kspu/CrewLight/tree/Archive)
+* [Source](https://github.com/net-lisias-kspu/CrewLight)
 * Documentation
-	+ [Homepage](http://ksp.lisias.net/add-ons/CrewLight) on L Aerospace KSP Division
-	+ [Project's README](https://github.com/net-lisias-ksp/CrewLight/blob/master/README.md)
-	+ [Install Instructions](https://github.com/net-lisias-ksp/CrewLight/blob/master/INSTALL.md)
-	+ [Change Log](./CHANGE_LOG.md)
-	+ [Known Issues](./KNOWN_ISSUES.md)
-	+ [TODO List](./TODO.md)
-* Official Distribution Sites:
-	+ [Homepage](http://ksp.lisias.net/add-ons/CrewLight) on L Aerospace
-	+ [Source and Binaries](https://github.com/net-lisias-ksp/CrewLight) on GitHub.
-	+ [Latest Release](https://github.com/net-lisias-ksp/CrewLight/releases)
-		- [Binaries](https://github.com/net-lisias-ksp/CrewLight/Archive)
+    + [Project's README](https://github.com/net-lisias-kspu/CrewLight/blob/master/README.md)
+    + [Install Instructions](https://github.com/net-lisias-kspu/CrewLight/blob/master/INSTALL.md)
+    + [Change Log](./CHANGE_LOG.md)
+    + [TODO](./TODO.md) list
 
 
 ## Description
