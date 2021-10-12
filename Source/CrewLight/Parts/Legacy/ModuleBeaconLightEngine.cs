@@ -21,6 +21,7 @@
 
 */
 using System;
+using KSPe.Annotations;
 using UnityEngine;
 
 namespace CrewLight
@@ -45,7 +46,8 @@ namespace CrewLight
 			}
 		}
 
-		public void FixedUpdate ()
+		[UsedImplicitly]
+		private void FixedUpdate ()
 		{
 			if (part.vessel.ctrlState.mainThrottle > 0 && ! isOn) {
 				SwitchLight.On (navLight);

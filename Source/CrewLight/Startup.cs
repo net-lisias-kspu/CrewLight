@@ -20,6 +20,7 @@
 	along with KSP-Recall. If not, see <https://www.gnu.org/licenses/>.
 
 */
+using KSPe.Annotations;
 using UnityEngine;
 
 namespace CrewLight
@@ -27,6 +28,7 @@ namespace CrewLight
 	[KSPAddon (KSPAddon.Startup.Instantly, true)]
 	internal class Startup : MonoBehaviour
 	{
+		[UsedImplicitly]
 		private void Start ()
 		{
 			Log.force ("Version {0}", Version.Text);

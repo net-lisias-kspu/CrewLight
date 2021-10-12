@@ -21,6 +21,7 @@
 
 */
 using System;
+using KSPe.Annotations;
 using UnityEngine;
 
 namespace CrewLight
@@ -31,7 +32,8 @@ namespace CrewLight
 		private bool disableCrewAG;
 		private bool disableAllAG;
 
-		void Start ()
+		[UsedImplicitly]
+		private void Start ()
 		{
 			CL_GeneralSettings settings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
 			disableCrewAG = settings.disableCrewAG;
@@ -42,7 +44,8 @@ namespace CrewLight
 			}
 		}
 
-		void OnDestroy ()
+		[UsedImplicitly]
+		private void OnDestroy ()
 		{
 			if (disableCrewAG || disableAllAG) {
 				GameEvents.onEditorPartEvent.Remove (CheckForLight);

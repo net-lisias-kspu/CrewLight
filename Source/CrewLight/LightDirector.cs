@@ -21,6 +21,7 @@
 
 */
 using System.Collections;
+using KSPe.Annotations;
 using UnityEngine;
 
 namespace CrewLight
@@ -32,7 +33,8 @@ namespace CrewLight
 		private CL_SunLightSettings sunLightSettings;
 //		private CL_HeadlightSettings headLightSettings;
 
-		public void Start ()
+		[UsedImplicitly]
+		private void Start ()
 		{
 			this.RegisterEventHandlers ();
 
@@ -68,7 +70,8 @@ namespace CrewLight
 			}
 		}
 
-		public void OnDestroy ()
+		[UsedImplicitly]
+		private void OnDestroy ()
 		{
 			// CrewLight :
 			if (generalSettings.useTransferCrew) {

@@ -27,6 +27,7 @@ using KSP.Localization;
 
 using GUILayout = KSPe.UI.GUILayout;
 using Asset = KSPe.IO.Asset<CrewLight.Startup>;
+using KSPe.Annotations;
 
 namespace CrewLight
 {
@@ -51,7 +52,8 @@ namespace CrewLight
 
 		private Texture morseAlph;
 
-		public void Start ()
+		[UsedImplicitly]
+		private void Start ()
 		{
 			GameEvents.OnGameSettingsApplied.Add (SettingsApplied);
 			GameEvents.onGameStateLoad.Add (GameLoad);
@@ -79,7 +81,8 @@ namespace CrewLight
 			ParseSettings ();
 		}
 
-		public void OnDestroy ()
+		[UsedImplicitly]
+		private void OnDestroy ()
 		{
 			GameEvents.OnGameSettingsApplied.Remove (SettingsApplied);
 			GameEvents.onGameStateLoad.Remove (GameLoad);
@@ -199,7 +202,8 @@ namespace CrewLight
 		private Rect morseSettingsRect;
 		private Rect morseAlphabetRect;
 
-		public void OnGUI ()
+		[UsedImplicitly]
+		private void OnGUI ()
 		{
 			if (showSettingsWindow)
 			{

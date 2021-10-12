@@ -23,6 +23,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using KSPe.Annotations;
 using UnityEngine;
 
 namespace CrewLight
@@ -41,7 +42,8 @@ namespace CrewLight
 
 		private CL_GeneralSettings settings;
 
-		public void Start ()
+		[UsedImplicitly]
+		private void Start ()
 		{
 			settings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
 
@@ -71,7 +73,8 @@ namespace CrewLight
 			StartCoroutine ("StartMorseLight");
 		}
 
-		public void OnDestroy ()
+		[UsedImplicitly]
+		private void OnDestroy ()
 		{
 			StopAllCoroutines ();
 			if (isRunning) { LightPreviousState (); }

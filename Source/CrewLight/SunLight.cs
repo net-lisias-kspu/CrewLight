@@ -23,6 +23,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using KSPe.Annotations;
 using UnityEngine;
 
 namespace CrewLight
@@ -38,7 +39,8 @@ namespace CrewLight
 		private CL_GeneralSettings generalSettings;
 		private CL_AviationLightsSettings aviationLightsSettings;
 
-		public void Start ()
+		[UsedImplicitly]
+		private void Start ()
 		{
 			settings = HighLogic.CurrentGame.Parameters.CustomParams<CL_SunLightSettings> ();
 			generalSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
@@ -56,7 +58,8 @@ namespace CrewLight
 			StartCoroutine ("StartSunLight");
 		}
 
-		public void OnDestroy ()
+		[UsedImplicitly]
+		private void OnDestroy ()
 		{
 			StopAllCoroutines ();
 		}

@@ -22,6 +22,7 @@
 */
 using System.Collections;
 using System.Collections.Generic;
+using KSPe.Annotations;
 using UnityEngine;
 using GUILayout = KSPe.UI.GUILayout;
 
@@ -119,7 +120,8 @@ namespace CrewLight
 			GameEvents.onEditorPartEvent.Add (ResetSymmetry);
 		}
 
-		void OnDestroy ()
+		[UsedImplicitly]
+		private void OnDestroy ()
 		{
 			Destroy (detectionCone);
 			GameEvents.onEditorSymmetryModeChange.Remove (ResetSymmetry);
@@ -218,12 +220,15 @@ namespace CrewLight
 			}
 		}
 
-		void Update ()
+		[UsedImplicitly]
+		private void Update ()
 		{
 			// GUI Stuff, OnUpdate run only in flight but the GUI is needed all times
 			UpdateGUI ();
 		}
+
 		#region GUI
+
 		[KSPEvent (active = true, guiActive = true, guiActiveEditor = true, guiActiveUnfocused = true, guiName = "Motion Detector")]
 		public void SetMotionDetector ()
 		{
@@ -244,7 +249,8 @@ namespace CrewLight
 			}
 		}
 
-		public void OnGUI ()
+		[UsedImplicitly]
+		private void OnGUI ()
 		{
 			GUI.skin = HighLogic.Skin;
 			GUI.skin.toggle.margin = new RectOffset (0, 0, 0, 0);
@@ -351,31 +357,36 @@ namespace CrewLight
 
 		public bool lightToggle = false;
 
-		void Start ()
+		[UsedImplicitly]
+		private void Start ()
 		{
 			module = this.GetComponentInParent<ModuleMotionDetector> ();
 		}
 
-		void OnDestroy ()
+		[UsedImplicitly]
+		private void OnDestroy ()
 		{
 			StopAllCoroutines ();
 		}
 
-		void OnTriggerEnter (Collider collider)
+		[UsedImplicitly]
+		private void OnTriggerEnter (Collider collider)
 		{
 			if (ColliderIsEVA (collider)) {
 				lightToggle = true;
 			}
 		}
 
-		void OnTriggerExit (Collider collider)
+		[UsedImplicitly]
+		private void OnTriggerExit (Collider collider)
 		{
 			if (ColliderIsEVA (collider)) {
 				StartCoroutine ("Countdown");
 			}
 		}
 
-		void OnTriggerStay (Collider collider)
+		[UsedImplicitly]
+		private void OnTriggerStay (Collider collider)
 		{
 			if (ColliderIsEVA (collider)) {
 				lightToggle = true;
