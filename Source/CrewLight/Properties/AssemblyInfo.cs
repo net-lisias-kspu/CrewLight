@@ -7,10 +7,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle ("CrewLight /L Unofficial")]
 [assembly: AssemblyDescription ("CrewLight is an automatic light manager")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany("L Aerospace/KSP Division")]
-[assembly: AssemblyProduct("CrewLight /L Unofficial")]
-[assembly: AssemblyCopyright("© 2021 LisiasT")]
-[assembly: AssemblyTrademark ("")]
+[assembly: AssemblyCompany(CrewLight.LegalMamboJambo.Company)]
+[assembly: AssemblyProduct(CrewLight.LegalMamboJambo.Product)]
+[assembly: AssemblyCopyright(CrewLight.LegalMamboJambo.Copyright)]
+[assembly: AssemblyTrademark (CrewLight.LegalMamboJambo.Trademark)]
 [assembly: AssemblyCulture ("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
@@ -19,8 +19,8 @@ using System.Runtime.CompilerServices;
 
 [assembly: AssemblyVersion (CrewLight.Version.Number)]
 [assembly: AssemblyFileVersion(CrewLight.Version.Number)]
-[assembly: KSPAssemblyDependency("KSPe", 2, 2)]
-[assembly: KSPAssemblyDependency("KSPe.UI", 2, 2)]
+[assembly: KSPAssemblyDependency("KSPe", 2, 4)]
+[assembly: KSPAssemblyDependency("KSPe.UI", 2, 4)]
 
 // The following attributes are used to specify the signing key for the assembly,
 // if desired. See the Mono documentation for more information about signing.
