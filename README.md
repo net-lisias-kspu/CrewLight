@@ -137,6 +137,8 @@ Detailed installation instructions are now on its own file (see the [In a Hurry]
 			- You don't mix your work with GPL incompatible works.
 	* If by some reason the GPL would be invalid for you, rest assured that you still retain the right to Use the Work under SKL 1.0. 
 
+Releases previous to 1.20 are still available under the MIT license [here](https://github.com/net-lisias-kspu/CrewLight/tree/upstream/master).
+
 Please note the copyrights and trademarks in [NOTICE](./NOTICE).
 
 
