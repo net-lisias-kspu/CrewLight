@@ -1,4 +1,4 @@
-# CrewLight :: Change Log
+# CrewLight /L Unleashed :: Change Log
 
 * 2021-0413: 1.20.0.2 (LisiasT) for KSP >= 1.4.0
 	+ Ensured compatibility for KSP versions from 1.4.1 to the latest

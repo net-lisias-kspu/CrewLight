@@ -1,8 +1,9 @@
-# CrewLight /L
+# CrewLight /L Unleashed
 
 **CrewLight** is an automatic light manager.
 
-**CrewLight /L** is CrewLight under Lisias' maintenance.
+[Unleashed](https://ksp.lisias.net/add-ons-unleashed/) fork by Lisias.
+
 
 
 ## Installation Instructions
