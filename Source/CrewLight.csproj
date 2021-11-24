@@ -36,6 +36,8 @@
       <DependentUpon>AssemblyVersion.tt</DependentUpon>
     </Compile>
     <Compile Include="InstallChecker.cs" />
+    <Compile Include="MoreMorseSettings.cs" />
+    <Compile Include="MorseCodeTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DisableLightAG.cs" />
     <Compile Include="LightDirector.cs" />

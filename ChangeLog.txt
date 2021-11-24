@@ -1,5 +1,11 @@
 ChangeLog
 
+1.20.1
+	Added check in SettingsApplied() to make sure actually in a game to avoid a nullref
+	Added text entry field to enter text and have it translated to Morse code
+	Removed silly way to open the More Morse window, now it opens when the More Morse radio button is toggled.  If not closed More Morse window will stay open until the settings screen is exited
+	Hard-coded layout in More Morse window
+
 1.20.0.1
 	Added AssemblyFileVersion
 	Updated version file for 1.12

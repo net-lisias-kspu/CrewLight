@@ -7,7 +7,7 @@ using ClickThroughFix;
 
 namespace CrewLight
 {
-	[KSPAddon(KSPAddon.Startup.EveryScene, true)]
+	[KSPAddon(KSPAddon.Startup.SpaceCentre, true)]
 	public class GameSettingsLive : MonoBehaviour
 	{
 		public static List<MorseCode> morseCode;
@@ -23,21 +23,23 @@ namespace CrewLight
 		private bool bckManual;
 		private bool restoreBck = true;
 
+#if false
 		// window pos
 		Vector2d windowPos;
-
 		private Texture morseAlph;
+#endif
 
 		public void Start ()
 		{
 			GameEvents.OnGameSettingsApplied.Add (SettingsApplied);
 			GameEvents.onGameStateLoad.Add (GameLoad);
+#if false
 			GameEvents.onGameUnpause.Add (OutOfPause);
 
 			windowPos = new Vector2d (Screen.width / 2 + 120, Screen.height / 2 - 150);
 			morseSettingsRect = new Rect ((float)windowPos.x, (float)windowPos.y, 1, 1);
 			morseAlphabetRect = new Rect ((float)windowPos.x - 680, (float)windowPos.y, 450, 450);
-
+#endif
 			DoStart ();
 
 			DontDestroyOnLoad (this);
@@ -49,9 +51,9 @@ namespace CrewLight
 			{
 				return;
 			}
-
+#if false
 			morseAlph = (Texture)GameDatabase.Instance.GetTexture ("CrewLight/International_Morse_Code", false);
-
+#endif
 			morseSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
 			ParseSettings ();
 		}
@@ -60,7 +62,9 @@ namespace CrewLight
 		{
 			GameEvents.OnGameSettingsApplied.Remove (SettingsApplied);
 			GameEvents.onGameStateLoad.Remove (GameLoad);
+#if false
 			GameEvents.onGameUnpause.Remove (OutOfPause);
+#endif
 		}
 
 		private void GameLoad (ConfigNode node)
@@ -68,26 +72,32 @@ namespace CrewLight
 			DoStart ();
 		}
 
+#if false
 		private void OutOfPause ()
 		{
 			CloseSettings ();
 			restoreBck = true;
 		}
-
+#endif
 		private void SettingsApplied ()
 		{
 			// execute once when leaving the stock setting screen
-
-			if (morseSettings.morseConf)
+			if (HighLogic.LoadedScene == GameScenes.FLIGHT || HighLogic.LoadedScene == GameScenes.SPACECENTER ||
+				HighLogic.LoadedScene== GameScenes.TRACKSTATION)
 			{
-				// reset the more morse conf toggle to false asap
-				morseSettings.morseConf = false;
-				morseSettings.Save (HighLogic.CurrentGame.config);
+#if false
+				if (morseSettings.morseConf)
+				{
+					// reset the more morse conf toggle to false asap
+					morseSettings.morseConf = false;
+					morseSettings.Save(HighLogic.CurrentGame.config);
 
-				showSettingsWindow = true;
+					showSettingsWindow = true;
+				}
+				// backup the original settings
+				ParseToBackup();
+#endif
 			}
-			// backup the original settings
-			ParseToBackup ();
 		}
 
 		private void ParseToBackup ()
@@ -146,6 +156,9 @@ namespace CrewLight
 
 		}
 
+
+#if false
+
 		private void ApplySettings ()
 		{
 			ParseSettings ();
@@ -168,7 +181,7 @@ namespace CrewLight
 			showAlphabetWindow = false;
 		}
 
-		#region MorseGUI
+#region MorseGUI
 
 		private bool showSettingsWindow = false;
 		private bool showAlphabetWindow = false;
@@ -197,26 +210,36 @@ namespace CrewLight
 		{
 			GUILayout.BeginVertical ();
 
+			morseSettings.morseTextStr = GUILayout.TextField(morseSettings.morseTextStr, GUILayout.Width(200));
 			morseSettings.morseCodeStr = GUILayout.TextField (morseSettings.morseCodeStr);
+			if (morseSettings.morseTextStr != "")
+			{
+				morseSettings.morseCodeStr = MorseCodeTranslator.Translate(morseSettings.morseTextStr);
+			}
+			else
+			{
+				GUILayout.BeginHorizontal();
+				if (GUILayout.Button(/*Dit*/Localizer.Format("#autoLOC_CL_0029") + " (.)"))
+				{
+					morseSettings.morseCodeStr += ".";
+				}
+				if (GUILayout.Button(/*"Dah*/Localizer.Format("#autoLOC_CL_0032") + " (_)"))
+				{
+					morseSettings.morseCodeStr += "_";
+				}
+				GUILayout.EndHorizontal();
 
-			GUILayout.BeginHorizontal ();
-			if (GUILayout.Button (/*Dit*/Localizer.Format ("#autoLOC_CL_0029") + " (.)")) {
-				morseSettings.morseCodeStr += ".";
+				GUILayout.BeginHorizontal();
+				if (GUILayout.Button(/*"Letter Space */Localizer.Format("#autoLOC_CL_0036") + " ( )"))
+				{
+					morseSettings.morseCodeStr += " ";
+				}
+				if (GUILayout.Button(/*"Word Space*/Localizer.Format("#autoLOC_CL_0038") + " (|)"))
+				{
+					morseSettings.morseCodeStr += "|";
+				}
+				GUILayout.EndHorizontal();
 			}
-			if (GUILayout.Button (/*"Dah*/Localizer.Format ("#autoLOC_CL_0032") +  " (_)")) {
-				morseSettings.morseCodeStr += "_";
-			}
-			GUILayout.EndHorizontal ();
-
-			GUILayout.BeginHorizontal ();
-			if (GUILayout.Button (/*"Letter Space */Localizer.Format ("#autoLOC_CL_0036") + " ( )")) {
-				morseSettings.morseCodeStr += " ";
-			}
-			if (GUILayout.Button (/*"Word Space*/Localizer.Format ("#autoLOC_CL_0038") + " (|)")) {
-				morseSettings.morseCodeStr += "|";
-			}
-			GUILayout.EndHorizontal ();
-
 			GUILayout.BeginHorizontal ();
 			GUILayout.Label (/*"Dih duration :"*/Localizer.Format ("#autoLOC_CL_0030"));
 			if (GUILayout.Button ("--")) {
@@ -375,7 +398,8 @@ namespace CrewLight
 				morseSettings.wordSpaceDuration = morseSettings.dahDuration * 3;
 			}
 		}
-		#endregion
+#endregion
+#endif
 	}
 }
 
