@@ -1,5 +1,9 @@
 ChangeLog
 
+1.20.1.1
+	Thanks to github user @Fitiales for this:
+		Add es-es.cfg
+	
 1.20.1
 	Added check in SettingsApplied() to make sure actually in a game to avoid a nullref
 	Added text entry field to enter text and have it translated to Morse code
