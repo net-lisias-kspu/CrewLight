@@ -1,6 +1,6 @@
 ﻿/*
-	This file is part of Crew Light
-	© 2021 LisiasT : http://lisias.net <support@lisias.net>
+	This file is part of Crew Light /L Unleashed
+	© 2021-2023 LisiasT : http://lisias.net <support@lisias.net>
 
 	THIS FILE is licensed to you under:
 

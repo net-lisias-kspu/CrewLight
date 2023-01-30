@@ -1,12 +1,11 @@
 ﻿/*
 	This file is part of Crew Light /L Unleashed
-		© 2021 Lisias T : http://lisias.net <support@lisias.net>
+		© 2021-2023 LisiasT : http://lisias.net <support@lisias.net>
 		© 2016-2019 Lion-O
 
 	CrewLight is double licensed, as follows:
-
-	* SKL 1.0 : https://ksp.lisias.net/SKL-1_0.txt
-	* GPL 2.0 : https://www.gnu.org/licenses/gpl-2.0.txt
+		* SKL 1.0 : https://ksp.lisias.net/SKL-1_0.txt
+		* GPL 2.0 : https://www.gnu.org/licenses/gpl-2.0.txt
 
 	And you are allowed to choose the License that better suit your needs.
 

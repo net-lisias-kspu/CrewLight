@@ -1,6 +1,6 @@
 ﻿/*
 	This file is part of Crew Light /L Unleashed
-		© 2021 Lisias T : http://lisias.net <support@lisias.net>
+		© 2021-2023 LisiasT : http://lisias.net <support@lisias.net>
 		© 2016-2019 Lion-O
 
 	CrewLight is double licensed, as follows:
