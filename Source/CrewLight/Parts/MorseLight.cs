@@ -24,7 +24,6 @@
 */
 using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using KSPe.Annotations;
 using UnityEngine;
 
@@ -101,29 +100,29 @@ namespace CrewLight
 				vesselDistance = GetDistance ();
 			}
 
-			SwitchLight.Off (modulesLight);
+			SwitchLight.Instance.Off(modulesLight);
 			yield return new WaitForSeconds (settings.ditDuration);
 			// Morse message
 			foreach (MorseCode c in GameSettingsLive.morseCode) {
 				switch (c) {
 				case MorseCode.dih:
-					SwitchLight.On (modulesLight);
+					SwitchLight.Instance.On(modulesLight);
 					yield return new WaitForSeconds (settings.ditDuration);
 					break;
 				case MorseCode.dah:
-					SwitchLight.On (modulesLight);
+					SwitchLight.Instance.On(modulesLight);
 					yield return new WaitForSeconds (settings.dahDuration);
 					break;
 				case MorseCode.letterspc:
-					SwitchLight.Off (modulesLight);
+					SwitchLight.Instance.Off(modulesLight);
 					yield return new WaitForSeconds (settings.letterSpaceDuration);
 					break;
 				case MorseCode.wordspc:
-					SwitchLight.Off (modulesLight);
+					SwitchLight.Instance.Off(modulesLight);
 					yield return new WaitForSeconds (settings.wordSpaceDuration);
 					break;
 				case MorseCode.symspc:
-					SwitchLight.Off (modulesLight);
+					SwitchLight.Instance.Off(modulesLight);
 					yield return new WaitForSeconds (settings.symbolSpaceDuration);
 					break;
 				}
@@ -142,15 +141,15 @@ namespace CrewLight
 					if (isOn == null) {
 						if (modulesLight [i].part.CrewCapacity > 0) {
 							if (modulesLight [i].part.protoModuleCrew.Count > 0) {
-								SwitchLight.On (modulesLight [i].part);
+								SwitchLight.Instance.On(modulesLight [i].part);
 							} else {
-								SwitchLight.Off (modulesLight [i].part);
+								SwitchLight.Instance.Off(modulesLight [i].part);
 							}
 						}
 					} else if (isOn == true) {
-						SwitchLight.On (modulesLight [i].part);
+						SwitchLight.Instance.On(modulesLight [i].part);
 					} else {
-						SwitchLight.Off (modulesLight [i].part);
+						SwitchLight.Instance.Off(modulesLight [i].part);
 					}
 					i++;
 				}
@@ -179,67 +178,13 @@ namespace CrewLight
 					break;
 				}
 
-				// Check for lightable modules
-				if (part.Modules.Contains<ModuleColorChanger> ()) {
-					ModuleColorChanger partM = part.Modules.GetModule<ModuleColorChanger> ();
-					if (Regex.IsMatch (partM.toggleName, "light", RegexOptions.IgnoreCase)) {
-						modulesLight.Add (partM);
-						if (partM.animState) {
-							stateLight.Add (true);
-						} else {
-							stateLight.Add (false);
-						}
-					}
-				}
-				if (part.Modules.Contains<ModuleLight> ()) {
-					foreach (ModuleLight partM in part.Modules.GetModules<ModuleLight> ()) {
-						modulesLight.Add (partM);
-						if (partM.isOn) {
-							stateLight.Add (true);
-						} else {
-							stateLight.Add (false);
-						}
-					}
-				}
-				if (part.Modules.Contains<ModuleAnimateGeneric> ()) {
-					foreach (ModuleAnimateGeneric partM in part.Modules.GetModules<ModuleAnimateGeneric> ()) {
-						if (Regex.IsMatch (partM.actionGUIName, "light", RegexOptions.IgnoreCase)) {
-							modulesLight.Add (partM);
-							if (partM.animSwitch == false) {
-								stateLight.Add (true);
-							} else {
-								stateLight.Add (false);
-							}
-						}
-					}
-				}
-				if (part.Modules.Contains ("WBILight")) {
-					foreach (PartModule partM in part.Modules) {
-						if (partM.ClassName == "WBILight") {
-							modulesLight.Add (partM);
-							stateLight.Add (null);
-						}
-					}
-				}
-				if (part.Modules.Contains ("ModuleNavLight")) {
-					foreach (PartModule partM in part.Modules) {
-						if (partM.ClassName == "ModuleNavLight") {
-							modulesLight.Add (partM);
-							stateLight.Add (null);
-						}
-					}
-				}
-				if (part.Modules.Contains ("ModuleKELight")) {
-					foreach (PartModule partM in part.Modules) {
-						if (partM.ClassName == "ModuleKELight") {
-							modulesLight.Add (partM);
-							stateLight.Add ((bool)partM.GetType ().InvokeMember ("isOn", System.Reflection.BindingFlags.GetField, null, partM, null));
-						}
-					}
+				foreach (PartModule partM in part.Modules) if (Support.Facade.IsSupported(partM))
+				{ 
+					modulesLight.Add(partM);
+					stateLight.Add(Support.Facade.Instance(partM).IsOn(partM));
 				}
 			}
 		}
-
 	}
 }
 

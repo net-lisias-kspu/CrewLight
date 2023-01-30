@@ -84,7 +84,7 @@ namespace CrewLight
 
 			symParts = new List<Part> (part.symmetryCounterparts);
 			part.symmetryCounterparts.Clear ();
-			lights = new List<PartModule> (SwitchLight.GetLightModule (part));
+			lights = new List<PartModule> (SwitchLight.Instance.GetLightModule(part));
 			lightIsOn = SwitchLight.IsOn (lights);
 			part.symmetryCounterparts = symParts;
 
@@ -211,10 +211,10 @@ namespace CrewLight
 					symParts = new List<Part> (part.symmetryCounterparts);
 					part.symmetryCounterparts.Clear ();
 					if (lightIsOn) {
-						SwitchLight.Off (lights);
+						SwitchLight.Instance.Off(lights);
 						lightIsOn = false;
 					} else {
-						SwitchLight.On (lights);
+						SwitchLight.Instance.On(lights);
 						lightIsOn = true;
 					}
 					part.symmetryCounterparts = symParts;

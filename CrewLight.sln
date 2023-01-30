@@ -3,6 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight", "Source\CrewLight\CrewLight.csproj", "{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight.Support.AviationLights", "Source\AviationLights\CrewLight.Support.AviationLights.csproj", "{CC763A0B-DC27-400D-B754-14BD9EC11F53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support", "Support", "{785456F9-C3CD-4431-90C7-6082335CCC1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight.Support.KerbalElectric", "Source\KerbalElectric\CrewLight.Support.KerbalElectric.csproj", "{DCC60BE2-A905-4896-836D-18FF50E698A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight.Support.Stock", "Source\Stock\CrewLight.Support.Stock.csproj", "{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight.Support.WildBlueTools", "Source\WildBlueTools\CrewLight.Support.WildBlueTools.csproj", "{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,29 +23,42 @@ Global
 		{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC763A0B-DC27-400D-B754-14BD9EC11F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC763A0B-DC27-400D-B754-14BD9EC11F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC763A0B-DC27-400D-B754-14BD9EC11F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC763A0B-DC27-400D-B754-14BD9EC11F53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC60BE2-A905-4896-836D-18FF50E698A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC60BE2-A905-4896-836D-18FF50E698A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC60BE2-A905-4896-836D-18FF50E698A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC60BE2-A905-4896-836D-18FF50E698A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
-		$1.DirectoryNamespaceAssociation = None
-		$1.ResourceNamePolicy = FileFormatDefault
 		$0.TextStylePolicy = $2
 		$2.inheritsSet = null
 		$2.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $3
 		$3.AfterDelegateDeclarationParameterComma = True
-		$3.inheritsSet = Mono
-		$3.inheritsScope = text/x-csharp
 		$3.scope = text/x-csharp
+		$3.NewLinesForBracesInAnonymousTypes = False
+		$3.NewLinesForBracesInObjectCollectionArrayInitializers = False
+		$3.NewLinesForBracesInLambdaExpressionBody = False
+		$3.NewLineForMembersInObjectInit = False
+		$3.NewLineForMembersInAnonymousTypes = False
 		$0.TextStylePolicy = $4
-		$4.FileWidth = 120
-		$4.TabsToSpaces = False
-		$4.inheritsSet = VisualStudio
-		$4.inheritsScope = text/plain
 		$4.scope = text/plain
+		$4.FileWidth = 132
+		$4.EolMarker = Unix
 		$0.StandardHeader = $5
-		$5.Text = 
-		$5.IncludeInNewFiles = True
 		$0.NameConventionPolicy = $6
 		$6.Rules = $7
 		$7.NamingRule = $8
@@ -161,7 +184,12 @@ Global
 		$27.IncludeInstanceMembers = True
 		$27.IncludeStaticEntities = True
 		$0.VersionControlPolicy = $29
-		$29.inheritsSet = Mono
 		outputpath = output
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC763A0B-DC27-400D-B754-14BD9EC11F53} = {785456F9-C3CD-4431-90C7-6082335CCC1C}
+		{DCC60BE2-A905-4896-836D-18FF50E698A6} = {785456F9-C3CD-4431-90C7-6082335CCC1C}
+		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8} = {785456F9-C3CD-4431-90C7-6082335CCC1C}
+		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584} = {785456F9-C3CD-4431-90C7-6082335CCC1C}
 	EndGlobalSection
 EndGlobal

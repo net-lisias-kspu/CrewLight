@@ -23,7 +23,6 @@
 	If not, see <https://www.gnu.org/licenses/>.
 
 */
-using System;
 using KSPe.Annotations;
 using UnityEngine;
 
@@ -55,17 +54,14 @@ namespace CrewLight
 			}
 		}
 
-		void CheckForLight (ConstructionEventType constrE, Part part)
+		private void CheckForLight (ConstructionEventType constrE, Part part)
 		{
 			if (constrE == ConstructionEventType.PartCreated) {
 				if (disableCrewAG && !disableAllAG) {
 					if (part.CrewCapacity < 1) { return; }
 				}
-				if (part.Modules.Contains<ModuleColorChanger> () 
-					|| part.Modules.Contains<ModuleLight> () 
-					|| part.Modules.Contains<ModuleAnimateGeneric> () 
-					|| part.Modules.Contains ("WBILight")
-					|| part.Modules.Contains ("ModuleKELight"))
+				
+				if (Support.Facade.IsSupported(part))
 				{
 					foreach (PartModule partM in part.Modules) {
 						if (partM.Actions.Contains(KSPActionGroup.Light)) {

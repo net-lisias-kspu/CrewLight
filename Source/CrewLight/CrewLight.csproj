@@ -51,6 +51,7 @@
     <Compile Include="ModuleManagerSupport.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\LegalMamboJambo.cs" />
+    <Compile Include="Support\Facade.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Version.tt">
@@ -80,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Parts\Legacy\" />
+    <Folder Include="Support\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

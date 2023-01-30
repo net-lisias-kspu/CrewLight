@@ -23,9 +23,7 @@
 	If not, see <https://www.gnu.org/licenses/>.
 
 */
-using System;
 using KSPe.Annotations;
-using UnityEngine;
 
 namespace CrewLight
 {
@@ -36,29 +34,31 @@ namespace CrewLight
 
 		public override void OnStart (StartState state)
 		{
+			this.enabled = true;
+
 			CL_AviationLightsSettings settings = HighLogic.CurrentGame.Parameters.CustomParams<CL_AviationLightsSettings> ();
 			if (! HighLogic.LoadedSceneIsFlight || ! settings.beaconOnEngine) {
-				Destroy (this);
+				this.enabled = false;
 			}
 
-			foreach (PartModule pm in part.Modules) {
-				if (pm.ClassName == "ModuleNavLight") {
+			foreach (PartModule pm in part.Modules)
+				if (Support.Facade.Instance(pm).IsBeaconLight(pm))
+				{
 					navLight = pm;
 					break;
 				}
-			}
 		}
 
 		[UsedImplicitly]
 		private void FixedUpdate ()
 		{
 			if (part.vessel.ctrlState.mainThrottle > 0 && ! isOn) {
-				SwitchLight.On (navLight);
+				Support.Facade.Instance(navLight).TurnOn(navLight);
 				isOn = true;
 				return;
 			} 
 			if (part.vessel.ctrlState.mainThrottle == 0 && isOn){
-				SwitchLight.Off (navLight);
+				Support.Facade.Instance(navLight).TurnOff(navLight);
 				isOn = false;
 			}
 		}

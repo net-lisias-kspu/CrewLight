@@ -365,47 +365,6 @@ namespace CrewLight
 			nodeAviationLights.SetValue ("turn_on_beacon_light_with_engine", beaconOnEngine, 
 				"beacon light will go only when you push the throttle", true);
 
-			if (nodeAviationLights.HasValue ("beacon_amber")) {
-				beaconAmber = int.Parse (nodeAviationLights.GetValue ("beacon_amber"));
-			}
-			nodeAviationLights.SetValue ("beacon_amber", beaconAmber, 
-				"0 = off, 1 = flash, 2 = double flash, 3 = interval, 4 = on", true);
-
-			if (nodeAviationLights.HasValue ("beacon_red")) {
-				beaconRed = int.Parse (nodeAviationLights.GetValue ("beacon_red"));
-			}
-			nodeAviationLights.SetValue ("beacon_red", beaconRed, 
-				"0 = off, 1 = flash, 2 = double flash, 3 = interval, 4 = on", true);
-
-			if (nodeAviationLights.HasValue ("nav_blue")) {
-				navBlue = int.Parse (nodeAviationLights.GetValue ("nav_blue"));
-			}
-			nodeAviationLights.SetValue ("nav_blue", navBlue, 
-				"0 = off, 1 = flash, 2 = double flash, 3 = interval, 4 = on", true);
-
-			if (nodeAviationLights.HasValue ("nav_green")) {
-				navGreen = int.Parse (nodeAviationLights.GetValue ("nav_green"));
-			}
-			nodeAviationLights.SetValue ("nav_green", navGreen, 
-				"0 = off, 1 = flash, 2 = double flash, 3 = interval, 4 = on", true);
-
-			if (nodeAviationLights.HasValue ("nav_red")) {
-				navRed = int.Parse (nodeAviationLights.GetValue ("nav_red"));
-			}
-			nodeAviationLights.SetValue ("nav_red", navRed, 
-				"0 = off, 1 = flash, 2 = double flash, 3 = interval, 4 = on", true);
-
-			if (nodeAviationLights.HasValue ("nav_white")) {
-				navWhite = int.Parse (nodeAviationLights.GetValue ("nav_white"));
-			}
-			nodeAviationLights.SetValue ("nav_white", navWhite, 
-				"0 = off, 1 = flash, 2 = double flash, 3 = interval, 4 = on", true);
-
-			if (nodeAviationLights.HasValue ("strobe_white")) {
-				strobeWhite = int.Parse (nodeAviationLights.GetValue ("strobe_white"));
-			}
-			nodeAviationLights.SetValue ("strobe_white", strobeWhite, 
-				"0 = off, 1 = flash, 2 = double flash, 3 = interval, 4 = on", true);
 			//
 			// Motion Detector Light
 			//

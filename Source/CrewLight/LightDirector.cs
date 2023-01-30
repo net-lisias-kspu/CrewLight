@@ -113,7 +113,7 @@ namespace CrewLight
 			if (vessel.crewedParts != 0 && vessel.isEVA == false) {
 				foreach (ProtoCrewMember crewMember in vessel.GetVesselCrew()){
 					if (crewMember.KerbalRef != null) {// If this is false it should means the Kerbal is in a Command Seat
-						SwitchLight.On (crewMember.KerbalRef.InPart);
+						SwitchLight.Instance.On(crewMember.KerbalRef.InPart);
 					}
 				}
 			}
@@ -121,9 +121,9 @@ namespace CrewLight
 
 		private void CrewLightTransfer (GameEvents.HostedFromToAction<ProtoCrewMember, Part> eData)
 		{
-			SwitchLight.On (eData.to);
+			SwitchLight.Instance.On(eData.to);
 			if (eData.from.protoModuleCrew.Count == 0) {
-				SwitchLight.Off (eData.from);
+				SwitchLight.Instance.Off(eData.from);
 			}
 		}
 			

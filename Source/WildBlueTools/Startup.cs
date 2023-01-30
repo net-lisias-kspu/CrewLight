@@ -4,9 +4,8 @@
 		© 2016-2019 Lion-O
 
 	CrewLight is double licensed, as follows:
-
-	* SKL 1.0 : https://ksp.lisias.net/SKL-1_0.txt
-	* GPL 2.0 : https://www.gnu.org/licenses/gpl-2.0.txt
+		* SKL 1.0 : https://ksp.lisias.net/SKL-1_0.txt
+		* GPL 2.0 : https://www.gnu.org/licenses/gpl-2.0.txt
 
 	And you are allowed to choose the License that better suit your needs.
 
@@ -23,11 +22,18 @@
 	If not, see <https://www.gnu.org/licenses/>.
 
 */
+using KSPe.Annotations;
 using UnityEngine;
-namespace CrewLight
+
+namespace CrewLight.Support.WildBlueIndustries
 {
-	[KSPAddon (KSPAddon.Startup.Flight, true)]
-	public class ModuleDefault : MonoBehaviour
+	[KSPAddon (KSPAddon.Startup.Instantly, true)]
+	internal class Startup : MonoBehaviour
 	{
+		[UsedImplicitly]
+		private void Start ()
+		{
+			Log.force ("WildBlueIndustries Support for CrewLight Version {0}", Version.Text);
+		}
 	}
 }

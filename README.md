@@ -21,7 +21,7 @@
 
 ### What does it do ?
 
-It automatize lights managment !
+It automatize lights management !
 
 #### Every part that currently hold crew gets its lights turning on
 

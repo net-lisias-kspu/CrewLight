@@ -30,20 +30,26 @@ namespace CrewLight
 	{
 		private List<Part> ogSymPart;
 		private CL_GeneralSettings generalSettings;
-//		private CL_EVALightSettings evaSettings;
 
 		public override void OnStart (StartState state)
 		{
-			generalSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
-//			evaSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_EVALightSettings> ();
+			this.enabled = true;
 
-			if ((part.Modules.Contains<ModuleLight> () || part.Modules.Contains ("ModuleKELight") 
-				|| (part.Modules.Contains ("ModuleNavLight") && generalSettings.onAviationLights)) 
-				&& generalSettings.useVesselLightsOnEVA) {
-				ogSymPart = new List<Part> (part.symmetryCounterparts);
-			} else {
-				Destroy (this);
+			generalSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
+			if (generalSettings.useVesselLightsOnEVA)
+			{
+				Support.PartInterface light = Support.Facade.Instance(part);
+				if (
+					!light.IsNavigationLight()
+					||
+					(generalSettings.onAviationLights && light.IsNavigationLight())
+				)
+				{
+					ogSymPart = new List<Part> (part.symmetryCounterparts);
+					return;
+				}
 			}
+			this.enabled = false;
 		}
 
 		[KSPEvent (active = true, guiActiveUnfocused = true, externalToEVAOnly = true, guiName = "Toggle Light")]
@@ -54,40 +60,15 @@ namespace CrewLight
 				part.symmetryCounterparts.Clear ();
 			}
 
-			if (part.Modules.Contains<ModuleLight> ()) {
-				List<ModuleLight> lights = part.Modules.GetModules<ModuleLight> ();
-				foreach (ModuleLight light in lights) {
-					if (light.isOn) {
-						SwitchLight.Off (light);
-					} else {
-						SwitchLight.On (light);
-					}
-				}
-			}
-			if (part.Modules.Contains ("ModuleKELight")) {
-				foreach (PartModule partM in part.Modules) {
-					if (partM.ClassName == "ModuleKELight") {
-						if ((bool)partM.GetType ().InvokeMember ("isOn", System.Reflection.BindingFlags.GetField, null, partM, null)) {
-							SwitchLight.Off (part);
-						} else {
-							SwitchLight.On (part);
-						}
-					}
-				}
-			}
-			if (part.Modules.Contains ("ModuleNavLight")) {
-				foreach (PartModule partM in part.Modules) {
-					if (partM.ClassName == "ModuleNavLight") {
-						if ((int)partM.GetType ().InvokeMember ("navLightSwitch", System.Reflection.BindingFlags.GetField, null, partM, null) != 0) {
-							SwitchLight.Off (part);
-						} else {
-							SwitchLight.On (part);
-						}
-					}
-				}
+			foreach (PartModule partM in part.Modules)
+			{ 
+				if (Support.Facade.Instance(partM).IsOn(partM))
+					Support.Facade.Instance(partM).TurnOff(partM);
+				else
+					Support.Facade.Instance(partM).TurnOn(partM);
 			}
 
-			if (! generalSettings.lightSymLights) {
+			if (!generalSettings.lightSymLights) {
 				part.symmetryCounterparts = ogSymPart;
 			}
 		}

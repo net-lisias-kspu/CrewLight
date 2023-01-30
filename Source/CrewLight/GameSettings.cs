@@ -68,7 +68,6 @@ namespace CrewLight
 		public bool useTransferCrew = true;
 
 
-
 		[GameParameters.CustomParameterUI (/*Motion Detector*/"#autoLOC_CL_0020", toolTip = "#autoLOC_CL_0021")]
 		public bool useMotionDetector = true;
 
@@ -336,7 +335,6 @@ namespace CrewLight
 		}
 	}
 
-
 	public class CL_AviationLightsSettings : GameParameters.CustomParameterNode
 	{
 		public override string Title {
@@ -378,55 +376,9 @@ namespace CrewLight
 		[GameParameters.CustomParameterUI (/*Beacon light sync to engine*/"#autoLOC_CL_0061", toolTip = "#autoLOC_CL_0062")]
 		public bool beaconOnEngine = true;
 
-		[GameParameters.CustomParameterUI (/*Beacon amber*/"#autoLOC_CL_0076")]
-		public string beaconAmber = "#autoLOC_CL_0064";
-
-		[GameParameters.CustomParameterUI (/*Beacon red*/"#autoLOC_CL_0068")]
-		public string beaconRed = "#autoLOC_CL_0064";
-
-		[GameParameters.CustomParameterUI (/*Navigation blue*/"#autoLOC_CL_0069")]
-		public string navBlue = "#autoLOC_CL_0067";
-
-		[GameParameters.CustomParameterUI (/*Navigation green*/"#autoLOC_CL_0070")]
-		public string navGreen = "#autoLOC_CL_0067";
-
-		[GameParameters.CustomParameterUI (/*Navigation red*/"#autoLOC_CL_0071")]
-		public string navRed = "#autoLOC_CL_0067";
-
-		[GameParameters.CustomParameterUI (/*Navigation white*/"#autoLOC_CL_0072")]
-		public string navWhite = "#autoLOC_CL_0067";
-
-		[GameParameters.CustomParameterUI (/*Strobe white*/"#autoLOC_CL_0073")]
-		public string strobeWhite = "#autoLOC_CL_0065";
-
-		public override System.Collections.IList ValidValues (System.Reflection.MemberInfo member)
-		{
-			if (member.Name == "beaconAmber" || member.Name == "beaconRed" 
-				|| member.Name == "navBlue" || member.Name == "navGreen" 
-				|| member.Name == "navRed" || member.Name == "navWhite" 
-				|| member.Name == "strobeWhite")
-			{
-				System.Collections.Generic.List<string> flashList = new System.Collections.Generic.List<string> ();
-				flashList.Add (/*off*/Localizer.Format ("#autoLOC_CL_0063"));
-				flashList.Add (/*flash*/Localizer.Format ("#autoLOC_CL_0064"));
-				flashList.Add (/*double flash*/Localizer.Format ("#autoLOC_CL_0065"));
-				flashList.Add (/*interval*/Localizer.Format ("#autoLOC_CL_0066"));
-				flashList.Add (/*on*/Localizer.Format ("#autoLOC_CL_0067"));
-
-				return flashList;
-			} else {
-				return null;
-			}
-		}
-
 		public override bool Interactible (System.Reflection.MemberInfo member, GameParameters parameters)
 		{
-			if (parameters.CustomParams<CL_GeneralSettings> ().useAviationLightsEffect)
-			{
-				return true;
-			} else {
-				return false;
-			}
+			return (parameters.CustomParams<CL_GeneralSettings> ().useAviationLightsEffect);
 		}
 	}
 }
