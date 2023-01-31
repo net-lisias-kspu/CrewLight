@@ -23,8 +23,8 @@
 
 */
 using System.Collections;
-using KSPe.Annotations;
 using UnityEngine;
+using KSPe.Annotations;
 
 namespace CrewLight
 {
@@ -113,7 +113,7 @@ namespace CrewLight
 			if (vessel.crewedParts != 0 && vessel.isEVA == false) {
 				foreach (ProtoCrewMember crewMember in vessel.GetVesselCrew()){
 					if (crewMember.KerbalRef != null) {// If this is false it should means the Kerbal is in a Command Seat
-						SwitchLight.Instance.On(crewMember.KerbalRef.InPart);
+						Registry.SwitchLights.Instance[crewMember.KerbalRef.InPart].TurnOn();
 					}
 				}
 			}
@@ -121,10 +121,10 @@ namespace CrewLight
 
 		private void CrewLightTransfer (GameEvents.HostedFromToAction<ProtoCrewMember, Part> eData)
 		{
-			SwitchLight.Instance.On(eData.to);
-			if (eData.from.protoModuleCrew.Count == 0) {
-				SwitchLight.Instance.Off(eData.from);
-			}
+			if (eData.from.protoModuleCrew.Count == 0)
+				Registry.SwitchLights.Instance[eData.from].TurnOff();
+			else
+				Registry.SwitchLights.Instance[eData.to].TurnOn();
 		}
 			
 		#endregion

@@ -24,42 +24,37 @@
 
 */
 using KSPe.Annotations;
+using SwitchLights = LASL.KSP.Support.SwitchLights;
 
 namespace CrewLight
 {
 	public class ModuleBeaconLightEngine : PartModule
 	{
-		private PartModule navLight;
 		private bool isOn = false;
+		private bool IsBeaconLight = false;
 
 		public override void OnStart (StartState state)
 		{
-			this.enabled = true;
-
 			CL_AviationLightsSettings settings = HighLogic.CurrentGame.Parameters.CustomParams<CL_AviationLightsSettings> ();
 			if (! HighLogic.LoadedSceneIsFlight || ! settings.beaconOnEngine) {
 				this.enabled = false;
+				return;
 			}
 
-			foreach (PartModule pm in part.Modules)
-				if (Support.Facade.Instance(pm).IsBeaconLight(pm))
-				{
-					navLight = pm;
-					break;
-				}
+			this.enabled = this.IsBeaconLight = Registry.SwitchLights.Instance[this.part].IsBeaconLight();
 		}
 
 		[UsedImplicitly]
 		private void FixedUpdate ()
 		{
-			if (part.vessel.ctrlState.mainThrottle > 0 && ! isOn) {
-				Support.Facade.Instance(navLight).TurnOn(navLight);
-				isOn = true;
+			if (part.vessel.ctrlState.mainThrottle > 0 && !this.isOn) {
+				Registry.SwitchLights.Instance[this.part].TurnOn();
+				this.isOn = true;
 				return;
 			} 
-			if (part.vessel.ctrlState.mainThrottle == 0 && isOn){
-				Support.Facade.Instance(navLight).TurnOff(navLight);
-				isOn = false;
+			if (part.vessel.ctrlState.mainThrottle == 0 && this.isOn){
+				Registry.SwitchLights.Instance[this.part].TurnOff();
+				this.isOn = false;
 			}
 		}
 	}

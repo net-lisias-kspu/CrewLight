@@ -36,12 +36,16 @@ namespace CrewLight
 	[KSPAddon(KSPAddon.Startup.EveryScene, true)]
 	public class GameSettingsLive : MonoBehaviour
 	{
-		public static List<MorseCode> morseCode;
+		internal interface IUpdateable
+		{
+			void Update();
+		}
+
+		internal static readonly List<IUpdateable> updateables = new List<IUpdateable>();
 		public static bool inSunlight = true;
 		public static int layerMask = (1 << 10 | 1 << 15); // Scaled & Local Scenery layer
-		public static int maxSearch = 200;
 
-		private CL_GeneralSettings morseSettings;
+		private CL_GeneralSettings settings;
 
 		// Backup :
 		private string bckCode;
@@ -79,8 +83,7 @@ namespace CrewLight
 
 			morseAlph = Asset.Texture2D.LoadFromFile("International_Morse_Code");
 
-			morseSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
-			ParseSettings ();
+			settings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
 		}
 
 		[UsedImplicitly]
@@ -106,79 +109,58 @@ namespace CrewLight
 		{
 			// execute once when leaving the stock setting screen
 
-			if (morseSettings.morseConf)
+			if (settings.distanceMax > 2600)
+				settings.distanceMax = 2600;
+
+			if (settings.distanceMax <= settings.distance)
+				settings.distance = settings.distanceMax / 5;
+
+			if (settings.distance <= settings.distanceMin)
+				settings.distanceMin = settings.distance / 5;
+
+			if (settings.morseConf)
 			{
 				// reset the more morse conf toggle to false asap
-				morseSettings.morseConf = false;
-				morseSettings.Save (HighLogic.CurrentGame.config);
+				settings.morseConf = false;
+				settings.Save (HighLogic.CurrentGame.config);
 
 				showSettingsWindow = true;
 			}
 			// backup the original settings
 			ParseToBackup ();
+			this.CallUpdateables();
+		}
+
+		private void CallUpdateables()
+		{
+			foreach(IUpdateable i in updateables) i.Update();
 		}
 
 		private void ParseToBackup ()
 		{
-			bckCode = morseSettings.morseCodeStr;
-			bckDih = morseSettings.ditDuration;
-			bckDah = morseSettings.dahDuration;
-			bckSymSpace = morseSettings.symbolSpaceDuration;
-			bckLetterSpace = morseSettings.letterSpaceDuration;
-			bckWordSpace = morseSettings.wordSpaceDuration;
-			bckManual = morseSettings.manualTiming;
+			bckCode = settings.morseCodeStr;
+			bckDih = settings.ditDuration;
+			bckDah = settings.dahDuration;
+			bckSymSpace = settings.symbolSpaceDuration;
+			bckLetterSpace = settings.letterSpaceDuration;
+			bckWordSpace = settings.wordSpaceDuration;
+			bckManual = settings.manualTiming;
 		}
 
 		private void RestoreBackup ()
 		{
-			morseSettings.morseCodeStr = bckCode;
-			morseSettings.ditDuration = bckDih;
-			morseSettings.dahDuration = bckDah;
-			morseSettings.symbolSpaceDuration = bckSymSpace;
-			morseSettings.letterSpaceDuration = bckLetterSpace;
-			morseSettings.wordSpaceDuration = bckWordSpace;
-			morseSettings.manualTiming = bckManual;
-		}
-
-		private void ParseSettings ()
-		{
-			ParseMorseCode ();
-		}
-
-		private void ParseMorseCode ()
-		{
-			morseCode = new List<MorseCode> ();
-			foreach (char c in morseSettings.morseCodeStr) {
-				switch (c) {
-				case '.':
-					morseCode.Add (MorseCode.dih);
-					break;
-				case '_':
-					morseCode.Add (MorseCode.dah);
-					break;
-				case '-':
-					morseCode.Add (MorseCode.dah);
-					break;
-				case ' ':
-					morseCode.Add (MorseCode.letterspc);
-					break;
-				case '|':
-					morseCode.Add (MorseCode.wordspc);
-					break;
-				default:
-					morseCode.Add (MorseCode.dih);
-					break;
-				}
-				morseCode.Add (MorseCode.symspc);
-			}
-
+			settings.morseCodeStr = bckCode;
+			settings.ditDuration = bckDih;
+			settings.dahDuration = bckDah;
+			settings.symbolSpaceDuration = bckSymSpace;
+			settings.letterSpaceDuration = bckLetterSpace;
+			settings.wordSpaceDuration = bckWordSpace;
+			settings.manualTiming = bckManual;
 		}
 
 		private void ApplySettings ()
 		{
-			ParseSettings ();
-
-			morseSettings.Save (HighLogic.CurrentGame.config);
+			settings.Save (HighLogic.CurrentGame.config);
 			showSettingsWindow = false;
 			showAlphabetWindow = false;
 
@@ -226,71 +208,71 @@ namespace CrewLight
 		{
 			GUILayout.BeginVertical ();
 
-			morseSettings.morseCodeStr = GUILayout.TextField (morseSettings.morseCodeStr);
+			settings.morseCodeStr = GUILayout.TextField (settings.morseCodeStr);
 
 			GUILayout.BeginHorizontal ();
 			if (GUILayout.Button (/*Dit*/Localizer.Format ("#autoLOC_CL_0029") + " (.)")) {
-				morseSettings.morseCodeStr += ".";
+				settings.morseCodeStr += ".";
 			}
 			if (GUILayout.Button (/*"Dah*/Localizer.Format ("#autoLOC_CL_0032") +  " (_)")) {
-				morseSettings.morseCodeStr += "_";
+				settings.morseCodeStr += "_";
 			}
 			GUILayout.EndHorizontal ();
 
 			GUILayout.BeginHorizontal ();
 			if (GUILayout.Button (/*"Letter Space */Localizer.Format ("#autoLOC_CL_0036") + " ( )")) {
-				morseSettings.morseCodeStr += " ";
+				settings.morseCodeStr += " ";
 			}
 			if (GUILayout.Button (/*"Word Space*/Localizer.Format ("#autoLOC_CL_0038") + " (|)")) {
-				morseSettings.morseCodeStr += "|";
+				settings.morseCodeStr += "|";
 			}
 			GUILayout.EndHorizontal ();
 
 			GUILayout.BeginHorizontal ();
 			GUILayout.Label (/*"Dih duration :"*/Localizer.Format ("#autoLOC_CL_0030"));
 			if (GUILayout.Button ("--")) {
-				morseSettings.ditDuration -= .1f;
+				settings.ditDuration -= .1f;
 				UpdateTiming ();
 			}
 			if (GUILayout.Button ("-")) {
-				morseSettings.ditDuration -= .01f;
+				settings.ditDuration -= .01f;
 				UpdateTiming ();
 			}
-			GUILayout.Label (morseSettings.ditDuration.ToString ());
+			GUILayout.Label (settings.ditDuration.ToString ());
 			if (GUILayout.Button ("+")) {
-				morseSettings.ditDuration += .01f;
+				settings.ditDuration += .01f;
 				UpdateTiming ();
 			}
 
 			if (GUILayout.Button ("++")) {
-				morseSettings.ditDuration += .1f;
+				settings.ditDuration += .1f;
 				UpdateTiming ();
 			}
 			GUILayout.EndHorizontal ();
 
-			morseSettings.manualTiming = GUILayout.Toggle (morseSettings.manualTiming, /*"Manual Timing"*/Localizer.Format ("#autoLOC_CL_0031"));
+			settings.manualTiming = GUILayout.Toggle (settings.manualTiming, /*"Manual Timing"*/Localizer.Format ("#autoLOC_CL_0031"));
 
 			GUILayout.BeginHorizontal ();
 			GUILayout.Label (/*"Dah duration :"*/Localizer.Format ("#autoLOC_CL_0033"));
 			if (GUILayout.Button ("--")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.dahDuration -= .1f;
+				if (settings.manualTiming) {
+					settings.dahDuration -= .1f;
 				}
 			}
 			if (GUILayout.Button ("-")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.dahDuration -= .01f;
+				if (settings.manualTiming) {
+					settings.dahDuration -= .01f;
 				}
 			}
-			GUILayout.Label (morseSettings.dahDuration.ToString ());
+			GUILayout.Label (settings.dahDuration.ToString ());
 			if (GUILayout.Button ("+")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.dahDuration += .01f;
+				if (settings.manualTiming) {
+					settings.dahDuration += .01f;
 				}
 			}
 			if (GUILayout.Button ("++")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.dahDuration += .1f;
+				if (settings.manualTiming) {
+					settings.dahDuration += .1f;
 				}
 			}
 			GUILayout.EndHorizontal ();
@@ -298,24 +280,24 @@ namespace CrewLight
 			GUILayout.BeginHorizontal ();
 			GUILayout.Label (/*"Symbol Space :"*/Localizer.Format ("#autoLOC_CL_0034"));
 			if (GUILayout.Button ("--")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.symbolSpaceDuration -= .1f;
+				if (settings.manualTiming) {
+					settings.symbolSpaceDuration -= .1f;
 				}
 			}
 			if (GUILayout.Button ("-")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.symbolSpaceDuration -= .01f;
+				if (settings.manualTiming) {
+					settings.symbolSpaceDuration -= .01f;
 				}
 			}
-			GUILayout.Label (morseSettings.symbolSpaceDuration.ToString ());
+			GUILayout.Label (settings.symbolSpaceDuration.ToString ());
 			if (GUILayout.Button ("+")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.symbolSpaceDuration += .01f;
+				if (settings.manualTiming) {
+					settings.symbolSpaceDuration += .01f;
 				}
 			}
 			if (GUILayout.Button ("++")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.symbolSpaceDuration += .1f;
+				if (settings.manualTiming) {
+					settings.symbolSpaceDuration += .1f;
 				}
 			}
 			GUILayout.EndHorizontal ();
@@ -323,24 +305,24 @@ namespace CrewLight
 			GUILayout.BeginHorizontal ();
 			GUILayout.Label (/*"Letter Space :"*/Localizer.Format ("#autoLOC_CL_0036"));
 			if (GUILayout.Button ("--")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.letterSpaceDuration -= .1f;
+				if (settings.manualTiming) {
+					settings.letterSpaceDuration -= .1f;
 				}
 			}
 			if (GUILayout.Button ("-")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.letterSpaceDuration -= .01f;
+				if (settings.manualTiming) {
+					settings.letterSpaceDuration -= .01f;
 				}
 			}
-			GUILayout.Label (morseSettings.letterSpaceDuration.ToString ());
+			GUILayout.Label (settings.letterSpaceDuration.ToString ());
 			if (GUILayout.Button ("+")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.letterSpaceDuration += .01f;
+				if (settings.manualTiming) {
+					settings.letterSpaceDuration += .01f;
 				}
 			}
 			if (GUILayout.Button ("++")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.letterSpaceDuration += .1f;
+				if (settings.manualTiming) {
+					settings.letterSpaceDuration += .1f;
 				}
 			}
 			GUILayout.EndHorizontal ();
@@ -348,24 +330,24 @@ namespace CrewLight
 			GUILayout.BeginHorizontal ();
 			GUILayout.Label (/*"Word Space :"*/Localizer.Format ("#autoLOC_CL_0038"));
 			if (GUILayout.Button ("--")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.wordSpaceDuration -= .1f;
+				if (settings.manualTiming) {
+					settings.wordSpaceDuration -= .1f;
 				}
 			}
 			if (GUILayout.Button ("-")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.wordSpaceDuration -= .01f;
+				if (settings.manualTiming) {
+					settings.wordSpaceDuration -= .01f;
 				}
 			}
-			GUILayout.Label (morseSettings.wordSpaceDuration.ToString ());
+			GUILayout.Label (settings.wordSpaceDuration.ToString ());
 			if (GUILayout.Button ("+")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.wordSpaceDuration += .01f;
+				if (settings.manualTiming) {
+					settings.wordSpaceDuration += .01f;
 				}
 			}
 			if (GUILayout.Button ("++")) {
-				if (morseSettings.manualTiming) {
-					morseSettings.wordSpaceDuration += .1f;
+				if (settings.manualTiming) {
+					settings.wordSpaceDuration += .1f;
 				}
 			}
 			GUILayout.EndHorizontal ();
@@ -396,12 +378,12 @@ namespace CrewLight
 
 		private void UpdateTiming ()
 		{
-			if (!morseSettings.manualTiming)
+			if (!settings.manualTiming)
 			{
-				morseSettings.dahDuration = morseSettings.ditDuration * 3;
-				morseSettings.symbolSpaceDuration = morseSettings.ditDuration;
-				morseSettings.letterSpaceDuration = morseSettings.dahDuration;
-				morseSettings.wordSpaceDuration = morseSettings.dahDuration * 3;
+				settings.dahDuration = settings.ditDuration * 3;
+				settings.symbolSpaceDuration = settings.ditDuration;
+				settings.letterSpaceDuration = settings.dahDuration;
+				settings.wordSpaceDuration = settings.dahDuration * 3;
 			}
 		}
 		#endregion

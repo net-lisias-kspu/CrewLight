@@ -3,16 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight", "Source\CrewLight\CrewLight.csproj", "{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight.Support.AviationLights", "Source\AviationLights\CrewLight.Support.AviationLights.csproj", "{CC763A0B-DC27-400D-B754-14BD9EC11F53}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support", "Support", "{785456F9-C3CD-4431-90C7-6082335CCC1C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight.Support.KerbalElectric", "Source\KerbalElectric\CrewLight.Support.KerbalElectric.csproj", "{DCC60BE2-A905-4896-836D-18FF50E698A6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight.Support.Stock", "Source\Stock\CrewLight.Support.Stock.csproj", "{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrewLight.Support.WildBlueTools", "Source\WildBlueTools\CrewLight.Support.WildBlueTools.csproj", "{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,22 +13,6 @@ Global
 		{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC98DCB4-C95A-41FC-A98C-5225A3D951CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC763A0B-DC27-400D-B754-14BD9EC11F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC763A0B-DC27-400D-B754-14BD9EC11F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC763A0B-DC27-400D-B754-14BD9EC11F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC763A0B-DC27-400D-B754-14BD9EC11F53}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCC60BE2-A905-4896-836D-18FF50E698A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCC60BE2-A905-4896-836D-18FF50E698A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCC60BE2-A905-4896-836D-18FF50E698A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCC60BE2-A905-4896-836D-18FF50E698A6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
@@ -187,9 +161,5 @@ Global
 		outputpath = output
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CC763A0B-DC27-400D-B754-14BD9EC11F53} = {785456F9-C3CD-4431-90C7-6082335CCC1C}
-		{DCC60BE2-A905-4896-836D-18FF50E698A6} = {785456F9-C3CD-4431-90C7-6082335CCC1C}
-		{103D2139-2893-4D5F-9DAD-EB43EA0C3CD8} = {785456F9-C3CD-4431-90C7-6082335CCC1C}
-		{541A08A9-2732-4D31-B4BA-E6D4FF7EB584} = {785456F9-C3CD-4431-90C7-6082335CCC1C}
 	EndGlobalSection
 EndGlobal

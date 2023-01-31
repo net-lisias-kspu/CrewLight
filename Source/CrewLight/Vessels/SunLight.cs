@@ -24,20 +24,21 @@
 */
 using System.Collections;
 using System.Collections.Generic;
-using KSPe.Annotations;
 using UnityEngine;
+using KSPe.Annotations;
+using SwitchLights = LASL.KSP.Support.SwitchLights;
 
 namespace CrewLight
 {
-	public class SunLight : MonoBehaviour
+	public class SunLight : MonoBehaviour, GameSettingsLive.IUpdateable
 	{
-
 		private Vessel vessel;
-		private List<PartModule> modulesLight;
 		private bool inDark;
 
 		private CL_SunLightSettings settings;
 		private CL_GeneralSettings generalSettings;
+
+		private SwitchLights.Regime regime;
 
 		[UsedImplicitly]
 		private void Start ()
@@ -54,13 +55,20 @@ namespace CrewLight
 				Destroy (this);
 			}
 
+			this.CreateRegime();
+			GameSettingsLive.updateables.Add(this);
 			StartCoroutine ("StartSunLight");
 		}
+
+		void GameSettingsLive.IUpdateable.Update() => this.CreateRegime();
+		private void CreateRegime() => this.regime =
+			new SwitchLights.Regime(this.GetType().Name, !generalSettings.useVesselLightsOnEVA, false, !generalSettings.useTransferCrew, false);
 
 		[UsedImplicitly]
 		private void OnDestroy ()
 		{
 			StopAllCoroutines ();
+			GameSettingsLive.updateables.Remove(this);
 		}
 
 		private bool IsSunShine ()
@@ -96,7 +104,7 @@ namespace CrewLight
 						if (settings.useSunLight) {
 							StartCoroutine ("StageLight");
 						} else {
-							SwitchLight.Instance.On(modulesLight);
+							Registry.SwitchLights.Instance[this.vessel].TurnOn();
 						}
 						inDark = true;
 					}
@@ -108,7 +116,7 @@ namespace CrewLight
 			if (IsSunShine()) {
 				if (inDark) {
 					StopCoroutine ("StageLight");
-					SwitchLight.Instance.Off(modulesLight);
+					Registry.SwitchLights.Instance[this.vessel].TurnOff();
 					inDark = false;
 				}
 			} else {
@@ -116,17 +124,16 @@ namespace CrewLight
 					if (settings.useStaggeredLight) {
 						StartCoroutine ("StageLight");
 					} else {
-						SwitchLight.Instance.On(modulesLight);
+						Registry.SwitchLights.Instance[this.vessel].TurnOn();
 					}
 					inDark = true;
 				}
 			}
 		}
 
+		[UsedImplicitly]
 		private IEnumerator StartSunLight ()
 		{
-			yield return StartCoroutine ("FindLightPart");
-
 			inDark = IsSunShine (); 
 
 			while (true) {
@@ -139,10 +146,11 @@ namespace CrewLight
 			}
 		}
 
+		[UsedImplicitly]
 		private IEnumerator StageLight ()
 		{
-			foreach (List<PartModule> stageList in SliceLightList ()) {
-				SwitchLight.Instance.On(stageList);
+			foreach (List<Part> stageList in SliceLightList()) {
+				Registry.SwitchLights.Instance[this.vessel].TurnOn(stageList);
 				if (settings.useRandomDelay) {
 					yield return new WaitForSeconds (UnityEngine.Random.Range (.4f, 2f));
 				} else {
@@ -151,58 +159,26 @@ namespace CrewLight
 			}
 		}
 
-		private List<List<PartModule>> SliceLightList ()
+		private List<List<Part>> SliceLightList ()
 		{
-			List<List<PartModule>> slicedList = new List<List<PartModule>> ();
-			List<PartModule> workingList = new List<PartModule> (modulesLight);
+			List<List<Part>> slicedList = new List<List<Part>>();
+			List<Part> workingList = new List<Part>(Registry.SwitchLights.Instance[this.vessel].PartsWithLight());
 
-			while (workingList.Count != 0) {
-				List<PartModule> stageList = new List<PartModule> ();
+			while (0 != workingList.Count)
+			{
+				List<Part> stageList = new List<Part> ();
 				int rndLightInStage = UnityEngine.Random.Range (settings.minLightPerStage, settings.maxLightPerStage);
 				if (rndLightInStage > workingList.Count) {
 					rndLightInStage = workingList.Count;
 				}
 				for (int i = 0 ; i < rndLightInStage ; i++) {
 					int randIndex = UnityEngine.Random.Range (0, workingList.Count);
-					stageList.Add (workingList [randIndex]);
+					stageList.Add(workingList[randIndex]);
 					workingList.RemoveAt (randIndex);
 				}
-				slicedList.Add (stageList);
+				slicedList.Add(stageList);
 			}
 			return slicedList;
-		}
-
-		private IEnumerator FindLightPart ()
-		{
-			modulesLight = new List<PartModule> ();
-
-			int iSearch = -1;
-
-			yield return new WaitForSeconds (.1f);
-
-			foreach (Part part in vessel.Parts)
-			{
-				iSearch++;
-				if (iSearch >= GameSettingsLive.maxSearch) {
-					yield return new WaitForSeconds (.1f);
-					iSearch = 0;
-				}
-
-				// Check if the part is a landing gear/wheel
-				if (part.Modules.Contains<ModuleStatusLight> ()) {
-					continue;
-				}
-
-				// Check if part is uncrewed
-				if (part.CrewCapacity == 0 || ! generalSettings.useTransferCrew)
-					foreach (PartModule partM in part.Modules)
-						if (Support.Facade.Instance(partM).IsActive(partM))
-						{
-							if (settings.onlyNoAGpart && partM.Actions.Contains(KSPActionGroup.Light))
-								continue;
-							modulesLight.Add (partM);
-						}
-			}
 		}
 	}
 }

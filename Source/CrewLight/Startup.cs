@@ -41,26 +41,6 @@ namespace CrewLight
 				Log.error (e.ToShortMessage ());
 				KSPe.Common.Dialogs.ShowStopperAlertBox.Show (e);
 			}
-#if false
-			foreach (System.Reflection.Assembly asm in System.AppDomain.CurrentDomain.GetAssemblies()) {
-				Log.force("{0} -- {1}", asm.GetName().Name, asm.GetName().FullName);
-			}
-#endif
-			try {
-				using (KSPe.Util.SystemTools.Assembly.Loader a = new KSPe.Util.SystemTools.Assembly.Loader<Startup> ())
-				{
-					a.LoadAndStartup("CrewLight.Support.Stock");
-					if (KSPe.Util.SystemTools.Assembly.Exists.ByName("AviationLights"))
-						a.LoadAndStartup("CrewLight.Support.AviationLights");
-					if (KSPe.Util.SystemTools.Assembly.Exists.ByName("KerbalElectric"))
-						a.LoadAndStartup("CrewLight.Support.KerbalElectric");
-					if (KSPe.Util.SystemTools.Assembly.Exists.ByName("WildBlueTools"))
-						a.LoadAndStartup("CrewLight.Support.WildBlueTools");
-				}
-			} catch (KSPe.Util.InstallmentException e) {
-				Log.error (e.ToShortMessage ());
-				KSPe.Common.Dialogs.ShowStopperAlertBox.Show(e);
-			}
 		}
 	}
 }

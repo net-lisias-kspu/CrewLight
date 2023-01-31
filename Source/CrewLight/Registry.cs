@@ -22,12 +22,13 @@
 	If not, see <https://www.gnu.org/licenses/>.
 
 */
+using System;
 using System.Collections.Generic;
 
 namespace CrewLight
 {
 	namespace Registry {
-		public static class Vessels
+		internal static class Vessels
 		{
 			private static HashSet<Vessel> knownVessels = new HashSet<Vessel> ();
 
@@ -46,5 +47,43 @@ namespace CrewLight
 			}
 		}
 
+		internal static class SwitchLights
+		{
+			private static LASL.KSP.Support.SwitchLights.Controller _instance = null;
+			internal static LASL.KSP.Support.SwitchLights.Controller Instance => _instance ?? (_instance = new LASL.KSP.Support.SwitchLights.Controller(new Settings()));
+
+			internal class Settings : LASL.KSP.Support.SwitchLights.ISettings, GameSettingsLive.IUpdateable
+			{
+				private int _maxPartsToUse = 200;
+				private float _thresholdInSecs = 0;
+
+				int LASL.KSP.Support.SwitchLights.ISettings.maxPartsToUse => _maxPartsToUse;
+				float LASL.KSP.Support.SwitchLights.ISettings.thresholdInSecs => _thresholdInSecs;
+
+				internal Settings()
+				{
+					GameSettingsLive.updateables.Add(this);
+				}
+				~Settings() { }
+				void System.IDisposable.Dispose()
+				{
+					GameSettingsLive.updateables.Remove(this);
+				}
+
+				void GameSettingsLive.IUpdateable.Update()
+				{
+					{
+						CL_AviationLightsSettings settings = HighLogic.CurrentGame.Parameters.CustomParams<CL_AviationLightsSettings> ();
+						this._maxPartsToUse = settings.maxSearch;
+					}
+
+					{ 
+						CL_GeneralSettings settings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
+						this._thresholdInSecs = Math.Min(settings.dahDuration, settings.ditDuration);
+						this._thresholdInSecs = Math.Min(this._thresholdInSecs, settings.letterSpaceDuration);
+					}
+				}
+			}
+		}
 	}
 }

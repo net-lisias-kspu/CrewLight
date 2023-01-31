@@ -55,6 +55,17 @@ GIF incoming...
 ![GIF of GUI MotionDetectorLight](./Docs/imgs/MmYwl2Y.gif)
 
 
+#### 3rd Party Support
+
+* Stock (obviously!)
+* Aviation Lights
+* Kerbal Electric
+* Surface Mounted Lights
+* Wild Blue Tools
+* And more to come
+	+ (if I find something left)
+
+
 ### [Youtube review by KottabosGames](https://youtu.be/AE1pvzh2q1Y)
 
 

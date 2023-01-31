@@ -23,6 +23,7 @@
 
 */
 using System.Collections.Generic;
+using SwitchLights = LASL.KSP.Support.SwitchLights;
 
 namespace CrewLight
 {
@@ -38,7 +39,7 @@ namespace CrewLight
 			generalSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
 			if (generalSettings.useVesselLightsOnEVA)
 			{
-				Support.PartInterface light = Support.Facade.Instance(part);
+				SwitchLights.IPartFeature light = Registry.SwitchLights.Instance[part];
 				if (
 					!light.IsNavigationLight()
 					||
@@ -60,13 +61,10 @@ namespace CrewLight
 				part.symmetryCounterparts.Clear ();
 			}
 
-			foreach (PartModule partM in part.Modules)
-			{ 
-				if (Support.Facade.Instance(partM).IsOn(partM))
-					Support.Facade.Instance(partM).TurnOff(partM);
-				else
-					Support.Facade.Instance(partM).TurnOn(partM);
-			}
+			if (Registry.SwitchLights.Instance[part].IsOn())
+				Registry.SwitchLights.Instance[part].TurnOff();
+			else
+				Registry.SwitchLights.Instance[part].TurnOn();
 
 			if (!generalSettings.lightSymLights) {
 				part.symmetryCounterparts = ogSymPart;

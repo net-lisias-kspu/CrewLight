@@ -23,8 +23,9 @@
 	If not, see <https://www.gnu.org/licenses/>.
 
 */
-using KSPe.Annotations;
 using UnityEngine;
+using KSPe.Annotations;
+using SwitchLights = LASL.KSP.Support.SwitchLights;
 
 namespace CrewLight
 {
@@ -61,8 +62,7 @@ namespace CrewLight
 					if (part.CrewCapacity < 1) { return; }
 				}
 				
-				if (Support.Facade.IsSupported(part))
-				{
+				if (Registry.SwitchLights.Instance.Supports(part))
 					foreach (PartModule partM in part.Modules) {
 						if (partM.Actions.Contains(KSPActionGroup.Light)) {
 							foreach (BaseAction action in partM.Actions) {
@@ -73,7 +73,6 @@ namespace CrewLight
 							}
 						}
 					}
-				}
 			}
 		}
 	}

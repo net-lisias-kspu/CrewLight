@@ -24,13 +24,14 @@
 */
 using System.Collections;
 using System.Collections.Generic;
-using KSPe.Annotations;
 using UnityEngine;
+using KSPe.Annotations;
 using GUILayout = KSPe.UI.GUILayout;
+using SwitchLights = LASL.KSP.Support.SwitchLights;
 
 namespace CrewLight
 {
-	public class ModuleMotionDetector : PartModule
+	public class ModuleMotionDetector : PartModule, GameSettingsLive.IUpdateable
 	{
 		#region KSPField
 		[KSPField (isPersistant = true)]
@@ -51,7 +52,6 @@ namespace CrewLight
 		private bool useOffset;
 
 		private bool lightIsOn;
-		private List<PartModule> lights;
 		private List<Part> symParts;
 
 		private GameObject detectionCone;
@@ -59,40 +59,33 @@ namespace CrewLight
 
 		private bool showGUI;
 		private Rect windowRect;
+
+		private SwitchLights.Regime regime;
 		#endregion
 
 		public override void OnStart (StartState state)
 		{
-			if ((!HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ().useMotionDetector)/* || (!part.Modules.Contains<ModuleLight> ())*/) {
-				Events ["SetMotionDetector"].active = false;
-				this.enabled = false;
-				return;
+			this.enabled = (HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings>().useMotionDetector);
+			if (!this.enabled) {
+				Events["SetMotionDetector"].active = false;
 			}
 
-			inTheEditor = false;
-			if (state == StartState.Editor) {
-				inTheEditor = true;
-			}
-
-			useOffset = false;
-			if (part.name == "spotLight1" || part.name == "spotLight2") {
-				useOffset = true;
-			}
+			inTheEditor = (StartState.Editor == state);
+			this.useOffset = (part.name == "spotLight1" || part.name == "spotLight2");
 
 			showGUI = false;
 			windowRect = new Rect (0, 0, 120f, 180f);
 
 			symParts = new List<Part> (part.symmetryCounterparts);
 			part.symmetryCounterparts.Clear ();
-			lights = new List<PartModule> (SwitchLight.Instance.GetLightModule(part));
-			lightIsOn = SwitchLight.IsOn (lights);
+			lightIsOn = Registry.SwitchLights.Instance[this.part].IsOn();
 			part.symmetryCounterparts = symParts;
 
 			// Create the cone :
 			detectionCone = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 			detectionCone.layer = 4;//was 1, changed in 1.17 for ksp 1.5.1
-			detectionCone.transform.SetParent (lights[0].transform);
-			detectionCone.transform.position = lights[0].transform.position;
+			detectionCone.transform.SetParent(this.part.transform);
+			detectionCone.transform.position = this.part.transform.position;
 
 			Color coneColor = Color.yellow;
 			coneColor.a = .3f;
@@ -118,9 +111,15 @@ namespace CrewLight
 			UpdateMeshScale ();
 			ResetSymmetry ();
 
+			this.CreateRegime();
+			GameSettingsLive.updateables.Add(this);
 			GameEvents.onEditorSymmetryModeChange.Add (ResetSymmetry);
 			GameEvents.onEditorPartEvent.Add (ResetSymmetry);
 		}
+
+		void GameSettingsLive.IUpdateable.Update() => this.CreateRegime();
+		private void CreateRegime() => this.regime =
+			new SwitchLights.Regime(this.GetType().Name, true, true, true, false);
 
 		[UsedImplicitly]
 		private void OnDestroy ()
@@ -147,7 +146,7 @@ namespace CrewLight
 			detectionCone.transform.localScale = new Vector3 (range, range, range);
 
 			// Offset the sphere from the part
-			if (useOffset && lights.Count == 1) {
+			if (useOffset && Registry.SwitchLights.Instance[this.part].IsActive()) {
 				// I won't be able to offset in the right direction if there is more than one light source
 				float radius = detectionCone.transform.localScale.z / 2f;
 				float offset = radius - (radius / 10f);
@@ -211,10 +210,10 @@ namespace CrewLight
 					symParts = new List<Part> (part.symmetryCounterparts);
 					part.symmetryCounterparts.Clear ();
 					if (lightIsOn) {
-						SwitchLight.Instance.Off(lights);
+						Registry.SwitchLights.Instance[this.part].TurnOff(this.regime);
 						lightIsOn = false;
 					} else {
-						SwitchLight.Instance.On(lights);
+						Registry.SwitchLights.Instance[this.part].TurnOn(this.regime);
 						lightIsOn = true;
 					}
 					part.symmetryCounterparts = symParts;
@@ -342,13 +341,9 @@ namespace CrewLight
 			ToggleMeshRenderer (false);
 		}
 
-		private void ToggleMeshRenderer (bool enable)
+		private void ToggleMeshRenderer (bool enabled)
 		{
-			if (enable) {
-				detectionCone.GetComponent<MeshRenderer> ().enabled = true;
-			} else {
-				detectionCone.GetComponent<MeshRenderer> ().enabled = false;
-			}
+			this.detectionCone.GetComponent<MeshRenderer> ().enabled = enabled;
 		}
 		#endregion
 	}

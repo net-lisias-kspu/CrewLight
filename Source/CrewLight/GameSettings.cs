@@ -23,10 +23,11 @@
 
 */
 using KSP.Localization;
+using LASL.KSP.Misc;
 
 namespace CrewLight
 {
-	public class CL_GeneralSettings : GameParameters.CustomParameterNode
+	public class CL_GeneralSettings : GameParameters.CustomParameterNode, Morse.ISettings
 	{
 		public override string Title {
 			get {
@@ -64,13 +65,12 @@ namespace CrewLight
 			}
 		}
 
+
 		[GameParameters.CustomParameterUI (/*Automatic Pod Lightning*/"#autoLOC_CL_0002", toolTip = "#autoLOC_CL_0003")]
 		public bool useTransferCrew = true;
 
-
 		[GameParameters.CustomParameterUI (/*Motion Detector*/"#autoLOC_CL_0020", toolTip = "#autoLOC_CL_0021")]
 		public bool useMotionDetector = true;
-
 
 		[GameParameters.CustomStringParameterUI ("\n\0", autoPersistance = false)]
 		public string dummy7 = "";
@@ -81,6 +81,9 @@ namespace CrewLight
 		[GameParameters.CustomParameterUI (/*Morse Code*/"#autoLOC_CL_0022", toolTip = "#autoLOC_CL_0023")]
 		public bool useMorseCode = true;
 
+		[GameParameters.CustomParameterUI (/*Play Once*/"#autoLOC_CL_0022b", toolTip = "#autoLOC_CL_0023b")]
+		public bool playOnce = false;
+
 		[GameParameters.CustomParameterUI (/*Only for controlable vessel*/"#autoLOC_CL_0024")]
 		public bool onlyForControllable = false;
 
@@ -89,6 +92,12 @@ namespace CrewLight
 
 		[GameParameters.CustomIntParameterUI (/*Distance*/"#autoLOC_CL_0027", toolTip = "#autoLOC_CL_0028", minValue = 5, maxValue = 2000, displayFormat = "0m")]
 		public int distance = 200;
+
+		[GameParameters.CustomIntParameterUI (/*Maximum Distance*/"#autoLOC_CL_0027b", toolTip = "#autoLOC_CL_0028b", minValue = 5, maxValue = 2600, displayFormat = "0m")]
+		public int distanceMax = 2600;
+
+		[GameParameters.CustomIntParameterUI (/*Minimum Distance*/"#autoLOC_CL_0027c", toolTip = "#autoLOC_CL_0028c", minValue = 5, maxValue = 2000, displayFormat = "0m")]
+		public int distanceMin = 50;
 
 		[GameParameters.CustomParameterUI (/*More Morse Config*/"#autoLOC_CL_0074", toolTip = "#autoLOC_CL_0075")]
 		public bool morseConf = false;
@@ -170,6 +179,7 @@ namespace CrewLight
 		[GameParameters.CustomParameterUI (/*Use AviationLights effects*/"#autoLOC_CL_0058", toolTip = "#autoLOC_CL_0059")]
 		public bool useAviationLightsEffect = true;
 
+
 		public override bool Interactible (System.Reflection.MemberInfo member, GameParameters parameters)
 		{
 			// HeadLight interactible
@@ -193,14 +203,7 @@ namespace CrewLight
 			// Morse Code
 			if (member.Name == "onlyForControllable" || member.Name == "morseCodeStr" 
 				|| member.Name == "distance" || member.Name == "morseConf")
-			{
-				if (useMorseCode) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-
+				return this.useMorseCode;
 
 			return base.Interactible (member, parameters);
 		}
@@ -217,6 +220,14 @@ namespace CrewLight
 
 			return base.Enabled (member, parameters);
 		}
+
+		float Morse.ISettings.ditDuration => this.ditDuration;
+		float Morse.ISettings.dahDuration => this.dahDuration;
+		char Morse.ISettings.letterSpaceChar => this.letterSpaceChar.Length > 0 ?this.letterSpaceChar[0] : ' ';
+		float Morse.ISettings.letterSpaceDuration => this.letterSpaceDuration;
+		char Morse.ISettings.wordSpaceChar => this.wordSpaceChar.Length > 0 ?this.wordSpaceChar[0] : ' ';
+		float Morse.ISettings.wordSpaceDuration => this.wordSpaceDuration;
+		float Morse.ISettings.symbolSpaceDuration => this.symbolSpaceDuration;
 	}
 
 	public class CL_SunLightSettings : GameParameters.CustomParameterNode
@@ -375,6 +386,9 @@ namespace CrewLight
 
 		[GameParameters.CustomParameterUI (/*Beacon light sync to engine*/"#autoLOC_CL_0061", toolTip = "#autoLOC_CL_0062")]
 		public bool beaconOnEngine = true;
+
+		[GameParameters.CustomIntParameterUI(/*Maximum Part Search*/"#autoLOC_CL_0061b", toolTip = "#autoLOC_CL_0062b", maxValue = 500, minValue = 10)]
+		public int maxSearch = 200;
 
 		public override bool Interactible (System.Reflection.MemberInfo member, GameParameters parameters)
 		{

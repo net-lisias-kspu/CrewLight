@@ -41,9 +41,10 @@ namespace CrewLight
 
 		// Default settings :
 
-		// Distant Lightning :
+		// Morse Lightining :
 		public static bool useMorseCode = true;
 		public static bool onlyForControllable = false;
+		public static bool playOnce = false;
 		public static string morseCodeStr = "_._ ... .__.";
 		public static double distance = 200d;
 		public static float ditDuration = 1.1f;
@@ -102,9 +103,7 @@ namespace CrewLight
 		public static bool useMotionDetector = true;
 
 		// Internal :
-		public static List<MorseCode> morseCode;
 		public static int layerMask = (1 << 10 | 1 << 15); // Scaled & Local Scenery layer
-		public static int maxSearch = 200;
 
 		static CLSettings ()
 		{
@@ -375,31 +374,6 @@ namespace CrewLight
 				"enable the feature, lights must be set individualy, in flight or in the editor", true);
 
 			settingsNode.Save (KSPUtil.ApplicationRootPath + "GameData/CrewLight/PluginData/Settings.cfg");
-
-			ParseMorse ();
-		}
-
-		private static void ParseMorse ()
-		{
-			morseCode = new List<MorseCode> ();
-			foreach (char c in morseCodeStr) {
-				switch (c) {
-				case '.':
-					morseCode.Add (MorseCode.dih);
-					break;
-				case '_':
-					morseCode.Add (MorseCode.dah);
-					break;
-				case '-':
-					morseCode.Add (MorseCode.dah);
-					break;
-				default:
-					if (c == CLSettings.letterSpaceChar)        morseCode.Add (MorseCode.letterspc);
-					else if (c == CLSettings.wordSpaceChar)     morseCode.Add (MorseCode.wordspc);
-					break;
-				}
-				morseCode.Add (MorseCode.symspc);
-			}
 		}
 	}
 }
