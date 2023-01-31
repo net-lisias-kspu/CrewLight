@@ -1,5 +1,11 @@
 # CrewLight /L Unleashed :: Changes
 
+* 2023-0130: 1.20.2.0 (LisiasT) for KSP >= 1.3.1
+	+ Huge refactoring on the Light support subsystem
+		- Faster, safer, easier to maintain and to expand
+		- Resurrects long gone Aviation Lights support!
+	+ Merges es-es localization from upstream's.
+	+ Adds pt-br localization.
 * 2021-1028: 1.20.0.3 (LisiasT) for KSP >= 1.3.1
 	+ Breaks the 1.4.0 barrier, now this works down to 1.3.1!! #HURRAY!!
 	+ Recompiling (hate this word) against KSPe v2.4 due breaking API changes.
