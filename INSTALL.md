@@ -5,7 +5,6 @@
 [Unleashed](https://ksp.lisias.net/add-ons-unleashed/) fork by Lisias.
 
 
-
 ## Installation Instructions
 
 To install, place the GameData folder inside your Kerbal Space Program folder:
@@ -20,7 +19,7 @@ The following file layout must be present after installation:
 ```
 <KSP_ROOT>
 	[GameData]
-		[000_KSPAPIExtensions]
+		[000_KSPe]
 			...
 		[CrewLight]
 			[Localization]
@@ -45,7 +44,9 @@ The following file layout must be present after installation:
 
 ### Dependencies
 
-* [KSPe](https://github.com/net-lisias-ksp/KSPAPIExtensions/releases/) (for KSP >= 1.2.2 - yeah, anything goes)
+* [KSPe](https://github.com/net-lisias-ksp/KSPe/releases/) (for KSP >= 1.2.2 - yeah, anything goes)
+	+ Not Included
+* [LASL-KSP](https://github.com/net-lisias-ksp/LASL-KSP/releases/) (always use the latest, unless explicitly specified otherwise)
 	+ Not Included
 * [Module Manager](https://forum.kerbalspaceprogram.com/index.php?/topic/50533-*) 3.0.7 or later
 	+ Not Included

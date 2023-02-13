@@ -1,5 +1,7 @@
 # CrewLight /L Unleashed :: Changes
 
+* 2023-0213: 1.20.2.1 (LisiasT) for KSP >= 1.3.1
+	+ Extracts `SwitchLigths` and `MorseCode` into an external library, adding features and easing maintenance. 
 * 2023-0130: 1.20.2.0 (LisiasT) for KSP >= 1.3.1
 	+ Huge refactoring on the Light support subsystem
 		- Faster, safer, easier to maintain and to expand
