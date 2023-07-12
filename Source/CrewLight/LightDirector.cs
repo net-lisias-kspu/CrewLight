@@ -38,65 +38,17 @@ namespace CrewLight
 		[UsedImplicitly]
 		private void Start ()
 		{
-			this.RegisterEventHandlers ();
-
 			generalSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_GeneralSettings> ();
 			sunLightSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_SunLightSettings> ();
 //			headLightSettings = HighLogic.CurrentGame.Parameters.CustomParams<CL_HeadlightSettings> ();
-			// CrewLight :
-			if (generalSettings.useTransferCrew) {
-				GameEvents.onCrewTransferred.Add (CrewLightTransfer);
-				GameEvents.onVesselChange.Add (CrewLightVessel);
-				CrewLightVessel (FlightGlobals.ActiveVessel);
-			}
 
-			// EVALight :
-			if (generalSettings.useSunLightEVA) {
-				GameEvents.onCrewOnEva.Add (SunLightEVA);
-				Vessel vessel = FlightGlobals.ActiveVessel;
-				if (vessel.isEVA) {
-					SunLightEVA (vessel, vessel.FindPartModulesImplementing<KerbalEVA> () [0]);
-				}
-			}
-
-			// MorseLight :
-			if (generalSettings.useMorseCode) {
-				GameEvents.onVesselLoaded.Add (MorseLightAddVessel);
-			}
-
-			// SunLight :
-			if (sunLightSettings.useSunLight) {
-				GameEvents.onVesselGoOffRails.Add (SunLightAddVessel);
-				GameEvents.onVesselCreate.Add (SunLightAddVessel);
-				GameEvents.onVesselPartCountChanged.Add (SunLightVesselChanged);
-			}
+			this.RegisterEventHandlers ();
 		}
 
 		[UsedImplicitly]
 		private void OnDestroy ()
 		{
-			// CrewLight :
-			if (generalSettings.useTransferCrew) {
-				GameEvents.onCrewTransferred.Remove (CrewLightTransfer);
-				GameEvents.onVesselChange.Remove (CrewLightVessel);
-			}
-
-			// EVALight :
-			if (generalSettings.useSunLightEVA) {
-				GameEvents.onCrewOnEva.Remove (SunLightEVA);
-			}
-
-			// MorseLight :
-			if (generalSettings.useMorseCode) {
-				GameEvents.onVesselLoaded.Remove (MorseLightAddVessel);
-			}
-
-			// SunLight :
-			if (sunLightSettings.useSunLight) {
-				GameEvents.onVesselGoOffRails.Remove (SunLightAddVessel);
-				GameEvents.onVesselCreate.Remove (SunLightAddVessel);
-				GameEvents.onVesselPartCountChanged.Remove (SunLightVesselChanged);
-			}
+			this.UnregisterEventHandlers();
 		}
 
 		#region CrewLight
@@ -225,10 +177,66 @@ namespace CrewLight
 
 		private void RegisterEventHandlers()
 		{
-			GameEvents.onVesselCreate.Add (this.OnVesselCreated);	
-			GameEvents.onVesselDestroy.Add (this.OnVesselDestroyed);	
+			GameEvents.onVesselCreate.Add (this.OnVesselCreated);
+			GameEvents.onVesselDestroy.Add (this.OnVesselDestroyed);
+
+			// CrewLight :
+			if (generalSettings.useTransferCrew) {
+				GameEvents.onCrewTransferred.Add (CrewLightTransfer);
+				GameEvents.onVesselChange.Add (CrewLightVessel);
+				CrewLightVessel (FlightGlobals.ActiveVessel);
+			}
+
+			// EVALight :
+			if (generalSettings.useSunLightEVA) {
+				GameEvents.onCrewOnEva.Add (SunLightEVA);
+				Vessel vessel = FlightGlobals.ActiveVessel;
+				if (vessel.isEVA) {
+					SunLightEVA (vessel, vessel.FindPartModulesImplementing<KerbalEVA> () [0]);
+				}
+			}
+
+			// MorseLight :
+			if (generalSettings.useMorseCode) {
+				GameEvents.onVesselLoaded.Add (MorseLightAddVessel);
+			}
+
+			// SunLight :
+			if (sunLightSettings.useSunLight) {
+				GameEvents.onVesselGoOffRails.Add (SunLightAddVessel);
+				GameEvents.onVesselCreate.Add (SunLightAddVessel);
+				GameEvents.onVesselPartCountChanged.Add (SunLightVesselChanged);
+			}
 		}
 
+		private void UnregisterEventHandlers()
+		{
+			// SunLight :
+			if (sunLightSettings.useSunLight) {
+				GameEvents.onVesselGoOffRails.Remove (SunLightAddVessel);
+				GameEvents.onVesselCreate.Remove (SunLightAddVessel);
+				GameEvents.onVesselPartCountChanged.Remove (SunLightVesselChanged);
+			}
+
+			// MorseLight :
+			if (generalSettings.useMorseCode) {
+				GameEvents.onVesselLoaded.Remove (MorseLightAddVessel);
+			}
+
+			// EVALight :
+			if (generalSettings.useSunLightEVA) {
+				GameEvents.onCrewOnEva.Remove (SunLightEVA);
+			}
+
+			// CrewLight :
+			if (generalSettings.useTransferCrew) {
+				GameEvents.onCrewTransferred.Remove (CrewLightTransfer);
+				GameEvents.onVesselChange.Remove (CrewLightVessel);
+			}
+
+			GameEvents.onVesselDestroy.Remove(this.OnVesselDestroyed);	
+			GameEvents.onVesselCreate.Remove(this.OnVesselCreated);	
+		}
 	}
 }
 

@@ -127,6 +127,7 @@ namespace CrewLight
 			Destroy (detectionCone);
 			GameEvents.onEditorSymmetryModeChange.Remove (ResetSymmetry);
 			GameEvents.onEditorPartEvent.Remove (ResetSymmetry);
+			GameSettingsLive.updateables.Remove(this);
 		}
 
 		private void ResetSymmetry (int i = 0)
