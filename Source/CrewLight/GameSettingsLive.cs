@@ -76,10 +76,7 @@ namespace CrewLight
 
 		private void DoStart ()
 		{
-			if (HighLogic.fetch.currentGame == null)
-			{
-				return;
-			}
+			if (null != HighLogic.fetch.currentGame) return;
 
 			morseAlph = Asset.Texture2D.LoadFromFile("International_Morse_Code");
 
@@ -107,6 +104,10 @@ namespace CrewLight
 
 		private void SettingsApplied ()
 		{
+			if (null == this.settings) return;
+			if (null == HighLogic.fetch.currentGame) return;
+			if (null == HighLogic.CurrentGame) return;	// Being extra careful
+
 			// execute once when leaving the stock setting screen
 
 			if (settings.distanceMax > 2600)
@@ -126,6 +127,7 @@ namespace CrewLight
 
 				showSettingsWindow = true;
 			}
+
 			// backup the original settings
 			ParseToBackup ();
 			this.CallUpdateables();
